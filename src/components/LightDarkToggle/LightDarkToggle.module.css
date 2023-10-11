@@ -1,0 +1,17 @@
+.action {
+    display: block;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.icon {
+    stroke: var(--color-secondary);
+    fill: var(--color-secondary);
+}
+
+.icon:hover {
+    stroke: var(--color-secondary-light);
+    fill: var(--color-secondary-light);
+}

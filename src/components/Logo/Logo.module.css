@@ -1,0 +1,49 @@
+.wrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--color-primary);
+    border-radius: 0 20px 20px 0;
+}
+
+.glare {
+    height: 50%;
+    background: var(--color-primary-light);
+    border-radius: 20px 0 20px 0;
+
+    margin-top: auto;
+}
+
+.icon {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}
+
+@media (max-width: 768px){ 
+    .wrapper {
+        width: 80px;
+        height: 80px;
+    }
+
+    .icon {
+        width: 31px;
+        height: 29px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        width: 72px;
+        height: 72px;
+    }
+
+    .icon {
+        width: 28px;
+        height: 26px;
+    }
+}
