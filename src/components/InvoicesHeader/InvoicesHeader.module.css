@@ -1,0 +1,34 @@
+.wrapper {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.description {
+    color: var(--color-text-light);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 480px) {
+    .actions {
+        gap: 18px;
+    }
+}

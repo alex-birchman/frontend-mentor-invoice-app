@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { Sun, Moon } from "react-feather";
 
 import styles from "./LightDarkToggle.module.css";

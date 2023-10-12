@@ -24,7 +24,7 @@
     margin: auto;
 }
 
-@media (max-width: 768px){ 
+@media (max-width: 1024px) {
     .wrapper {
         width: 80px;
         height: 80px;
@@ -36,7 +36,7 @@
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .wrapper {
         width: 72px;
         height: 72px;

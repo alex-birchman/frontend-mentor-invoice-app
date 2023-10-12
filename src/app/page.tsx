@@ -1,5 +1,11 @@
 import styles from "./page.module.css";
 
+import InvoicesHeader from "@/components/InvoicesHeader";
+
 export default function Home() {
-    return <main className={styles.wrapper}></main>;
+    return (
+        <div className={styles.wrapper}>
+            <InvoicesHeader />
+        </div>
+    );
 }

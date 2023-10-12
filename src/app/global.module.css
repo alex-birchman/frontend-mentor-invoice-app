@@ -1,0 +1,25 @@
+/* Text sizes */
+
+.textSizeL {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textSizeM {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.textSizeS {
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+}
+
+.textSizeBody {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.125rem;
+}

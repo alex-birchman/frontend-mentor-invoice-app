@@ -1,0 +1,43 @@
+:root {
+    /* Colors  */
+    --color-text: hsla(231, 28%, 7%);
+    --color-text-light: hsla(231, 20%, 61%);
+    --color-primary: hsla(252, 94%, 67%);
+    --color-primary-light: hsla(252, 100%, 73%);
+
+    --color-secondary: hsla(231, 36%, 63%);
+    --color-secondary-light: hsla(231, 75%, 93%);
+
+    --color-white: hsla(0, 100%, 100%);
+    --color-shadow: hsla(231.724, 38%, 45%, 0.25);
+
+    --color-page-background: hsla(240, 27%, 98%);
+    --color-menu-background: hsla(231, 20%, 27%);
+    --color-menu-divider: hsla(231, 20%, 36%);
+
+    /* Content sizes */
+    --content-width: 730px;
+    --viewport-padding: 24px;
+}
+
+html {
+    background: var(--color-page-background);
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: row;
+}
+
+body > main {
+    flex: 1;
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    body {
+        flex-direction: column;
+    }
+}

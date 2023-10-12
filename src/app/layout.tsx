@@ -3,7 +3,7 @@ import { League_Spartan } from "next/font/google";
 
 import Menu from "@/components/Menu";
 
-import "./globals.css";
+import "./styles.css";
 import "./reset.css";
 
 const mainFont = League_Spartan({ subsets: ["latin"] });

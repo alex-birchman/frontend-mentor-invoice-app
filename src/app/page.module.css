@@ -1,3 +1,22 @@
 .wrapper {
-  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: var(--content-width);
+    padding: 0 var(--viewport-padding);
+    padding-top: 77px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding-top: 61px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wrapper {
+        padding-top: 32px;
+    }
 }
