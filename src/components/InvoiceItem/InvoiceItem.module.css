@@ -66,3 +66,51 @@
     grid-area: arrowIcon;
     stroke: var(--color-primary);
 }
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 25px 24px 22px 24px;
+    }
+
+    .content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 15px 24px 48px;
+        grid-template-areas:
+            "id clientName"
+            ". ."
+            "paymentDue status"
+            "totalSum status";
+    }
+
+    .id {
+        padding: 0;
+    }
+
+    .paymentDue {
+        padding: 0;
+    }
+
+    .clientName {
+        padding: 0;
+        text-align: right;
+    }
+
+    .totalSum {
+        text-align: left;
+        padding: 0;
+    }
+
+    .status {
+        padding: 0;
+        width: 105px;
+        margin-top: auto;
+        margin-left: auto;
+    }
+
+    .arrowIcon {
+        display: none;
+        grid-area: arrowIcon;
+        stroke: var(--color-primary);
+    }
+}
