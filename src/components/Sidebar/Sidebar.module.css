@@ -1,0 +1,50 @@
+.wrapper {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-content: left;
+    padding: 0;
+}
+
+.backdrop {
+    position: absolute;
+    inset: 0;
+    background: hsl(0deg 0% 0% / 0.5);
+}
+
+.container {
+    position: relative;
+    width: 720px;
+    background: var(--color-white);
+    margin-left: 0;
+    border-radius: 0 20px 20px 0;
+    padding-left: 100px;
+    overflow-y: scroll;
+}
+
+.content {
+    padding: 60px 56px 32px 56px;
+}
+
+@media (max-width: 1024px) {
+    .wrapper {
+        padding-top: 80px;
+    }
+
+    .container {
+        width: 615px;
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding-top: 72px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0;
+        border-radius: 0;
+    }
+}

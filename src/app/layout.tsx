@@ -23,6 +23,7 @@ export default function RootLayout({
             <body className={mainFont.className}>
                 <Menu />
                 <main>{children}</main>
+                <div id="sidebar-root" />
             </body>
         </html>
     );
