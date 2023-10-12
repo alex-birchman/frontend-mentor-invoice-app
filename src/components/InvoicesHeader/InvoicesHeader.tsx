@@ -10,10 +10,17 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import styles from "./InvoicesHeader.module.css";
 import globalStyles from "@/app/global.module.css";
 
-function InvoicesHeader() {
+type InvoicesHeaderProps = {
+    invoiceNumber: number;
+};
+
+function InvoicesHeader({ invoiceNumber }: InvoicesHeaderProps) {
     const { isMobile } = useMediaQuery();
 
-    const description = `${isMobile ? "" : "There are"} 7 total invoices`;
+    const description =
+        invoiceNumber === 0
+            ? "No invoices"
+            : `${isMobile ? "" : "There are"} ${invoiceNumber} total invoices`;
 
     return (
         <div className={styles.wrapper}>

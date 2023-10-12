@@ -34,10 +34,16 @@ body {
 body > main {
     flex: 1;
     position: relative;
+
+    padding-left: 100px;
 }
 
 @media (max-width: 1024px) {
     body {
         flex-direction: column;
+    }
+
+    body > main {
+        padding-left: 0;
     }
 }

@@ -3,13 +3,12 @@ import Image from "next/image";
 
 import styles from "./ProfileButton.module.css";
 
-function ProfileButton({
-    imageSrc,
-    alt = "Profile Picture",
-}: {
-    imageSrc: string;
+type ProfileButtonProps = {
+    imageSrc?: string;
     alt?: string;
-}) {
+};
+
+function ProfileButton({ imageSrc, alt = "" }: ProfileButtonProps) {
     return (
         <button className={styles.action}>
             <Image
