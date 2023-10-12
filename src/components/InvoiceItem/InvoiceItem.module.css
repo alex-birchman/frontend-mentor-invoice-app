@@ -1,0 +1,68 @@
+.wrapper {
+    padding: 16px 24px 16px 32px;
+    background: var(--color-white);
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    box-shadow: 0px 10px 10px -10px var(--color-shadow-light);
+    cursor: pointer;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 120px 120px repeat(2, 1fr) 125px 16px;
+    grid-template-rows: 40px;
+    grid-template-areas: "id paymentDue clientName totalSum status arrowIcon";
+    align-items: center;
+}
+
+.id {
+    grid-area: id;
+    text-align: left;
+
+    padding-right: 40px;
+}
+
+.idHashTag {
+    color: var(--color-secondary);
+    font-weight: 700;
+}
+
+.idNumber {
+    text-transform: uppercase;
+}
+
+.paymentDue {
+    grid-area: paymentDue;
+    text-align: left;
+    color: var(--color-secondary);
+
+    padding-right: 40px;
+}
+
+.clientName {
+    grid-area: clientName;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--color-secondary);
+
+    padding-right: 40px;
+}
+
+.totalSum {
+    grid-area: totalSum;
+    text-align: right;
+
+    padding-right: 40px;
+}
+
+.status {
+    grid-area: status;
+    padding-right: 20px;
+}
+
+.arrowIcon {
+    display: block;
+    grid-area: arrowIcon;
+    stroke: var(--color-primary);
+}

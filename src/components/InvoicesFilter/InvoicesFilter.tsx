@@ -6,8 +6,6 @@ import { Check, ChevronDown, ChevronUp } from "react-feather";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-import useMediaQuery from "@/hooks/useMediaQuery";
-
 import styles from "./InvoicesFilter.module.css";
 import globalStyles from "@/app/global.module.css";
 

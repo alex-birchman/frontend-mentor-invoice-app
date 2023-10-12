@@ -1,0 +1,43 @@
+.wrapper {
+    height: 40px;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+
+    padding: 11px;
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paid {
+    color: var(--color-status-paid);
+    fill: var(--color-status-paid);
+    background: var(--color-status-paid-bg);
+}
+
+.pending {
+    color: var(--color-status-pending);
+    fill: var(--color-status-pending);
+    background: var(--color-status-pending-bg);
+}
+
+.draft {
+    color: var(--color-status-draft);
+    fill: var(--color-status-draft);
+    background: var(--color-status-draft-bg);
+}
+
+.icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 4px;
+}
+
+.title {
+    text-transform: capitalize;
+}

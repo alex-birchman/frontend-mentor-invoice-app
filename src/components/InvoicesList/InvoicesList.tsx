@@ -1,14 +1,20 @@
 import * as React from "react";
 
-function InvoicesList({ data }) {
+import InvoiceItem from "@/components/InvoiceItem";
+
+import styles from "./InvoicesList.module.css";
+
+function InvoicesList({ invoices }) {
     return (
-        <ul>
-            <li>Invoice 1</li>
-            <li>Invoice 2</li>
-            <li>Invoice 3</li>
-            <li>Invoice 4</li>
-            <li>Invoice 5</li>
-        </ul>
+        <div className={styles.wrapper}>
+            <ul className={styles.list}>
+                {invoices.map((invoice) => (
+                    <li key={invoice.id}>
+                        <InvoiceItem {...invoice} />
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 }
 

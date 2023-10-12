@@ -4,7 +4,6 @@
     align-items: center;
     width: 100%;
     max-width: var(--content-width);
-    padding: 0 var(--viewport-padding);
     padding-top: 77px;
     margin: 0 auto;
 }

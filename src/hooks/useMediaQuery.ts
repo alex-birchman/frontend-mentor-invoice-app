@@ -14,9 +14,11 @@ function useMediaQuery({
     desktopWidth,
     tabletWidth,
 }: MediaQuery = defaultMediaQuery) {
-    const [dimensions, setDimensions] = React.useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
+    const [dimensions, setDimensions] = React.useState(() => {
+        return {
+            width: window.innerWidth,
+            height: window.innerHeight,
+        };
     });
 
     const isDesktop = dimensions.width >= desktopWidth;

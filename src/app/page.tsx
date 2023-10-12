@@ -4,8 +4,10 @@ import InvoicesHeader from "@/components/InvoicesHeader";
 import InvoicesList from "@/components/InvoicesList";
 import InvoicesNotFound from "@/components/InvoicesNotFound";
 
+import data from "@/db/data.json";
+
 export default function Home() {
-    const invoices = [];
+    const invoices = data;
 
     return (
         <div className={styles.wrapper}>
@@ -14,7 +16,7 @@ export default function Home() {
                 {invoices.length === 0 ? (
                     <InvoicesNotFound />
                 ) : (
-                    <InvoicesList data={[]} />
+                    <InvoicesList invoices={invoices} />
                 )}
             </div>
         </div>
