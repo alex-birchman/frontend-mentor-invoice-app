@@ -1,0 +1,138 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+}
+
+.tableHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 16px;
+    color: var(--color-secondary);
+}
+
+.tableBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.item {
+    display: grid;
+    column-gap: 16px;
+    grid-template-areas: "name qty price total action";
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.colName {
+    grid-area: name;
+    width: 180px;
+}
+
+.colQty {
+    grid-area: qty;
+    width: 80px;
+}
+
+.colPrice {
+    grid-area: price;
+    width: 100px;
+}
+
+.colTotal {
+    grid-area: total;
+    width: 72px;
+}
+
+.colAction {
+    grid-area: action;
+}
+
+.itemColNumber {
+    padding: 18px 12px 15px 12px;
+}
+
+.itemColTotal {
+    color: var(--color-text-light);
+}
+
+.itemTotal {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.itemTotalTitle {
+    display: none;
+    margin-bottom: auto;
+    color: var(--color-secondary);
+}
+
+.itemTotalContent {
+    margin-bottom: auto;
+}
+
+.trashButton {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.trashButton:hover {
+    fill: var(--color-danger);
+}
+
+.trashIcon {
+    max-width: fit-content;
+}
+
+@media (max-width: 768px) {
+    .tableHeader {
+        display: none;
+    }
+
+    .item {
+        display: grid;
+        column-gap: 16px;
+        row-gap: 25px;
+        grid-template-areas:
+            "name name name name"
+            "qty price total action";
+        align-items: center;
+        margin-bottom: 18px;
+    }
+
+    .colName {
+        width: 100%;
+    }
+
+    .colQty {
+        min-width: 64px;
+        width: 100%;
+    }
+
+    .colPrice {
+        width: 100%;
+        width: 100px;
+    }
+
+    .colTotal {
+        width: 100%;
+        height: 100%;
+        width: 100px;
+    }
+
+    .colAction {
+        width: 100%;
+    }
+
+    .itemTotalTitle {
+        display: block;
+    }
+}

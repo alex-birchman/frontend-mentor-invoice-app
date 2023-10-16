@@ -1,0 +1,175 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.backButton {
+    display: none;
+}
+
+.backButtonIcon {
+    stroke: var(--color-primary);
+}
+
+.title {
+    margin-bottom: 45px;
+}
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.billFrom {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.billFromTitle {
+    color: var(--color-primary);
+}
+
+.billAddressFields {
+    display: grid;
+    row-gap: 24px;
+    column-gap: 24px;
+    grid-template-areas:
+        "address address address"
+        "city postCode country";
+}
+
+.billTo {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    margin-top: 50px;
+}
+
+.billToTitle {
+    color: var(--color-primary);
+}
+
+.billToFields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.address {
+    grid-area: address;
+}
+
+.city {
+    grid-area: city;
+    width: 150px;
+}
+
+.postCode {
+    grid-area: postCode;
+    width: 150px;
+}
+
+.country {
+    grid-area: country;
+    width: 150px;
+}
+
+.billAdditionalFields {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.dateAndPaymentTerms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 24px;
+}
+
+.itemList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 35px;
+}
+
+.itemListTitle {
+    color: var(--color-secondary);
+}
+
+.itemListContent {
+    margin-bottom: 45px;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.actionsSaveButtons {
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .backButton {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+
+        display: flex;
+        gap: 15px;
+        align-items: center;
+
+        margin-bottom: 26px;
+    }
+
+    .title {
+        margin-bottom: 22px;
+    }
+
+    .billAddressFields {
+        display: grid;
+        row-gap: 24px;
+        column-gap: 24px;
+        grid-template-areas:
+            "address address"
+            "city postCode"
+            "country country";
+    }
+
+    .address {
+        width: 100%;
+        min-width: 320px;
+    }
+
+    .city {
+        width: 100%;
+        min-width: 150px;
+    }
+
+    .postCode {
+        width: 100%;
+        min-width: 150px;
+    }
+
+    .country {
+        width: 100%;
+        min-width: 320px;
+    }
+
+    .dateAndPaymentTerms {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+}

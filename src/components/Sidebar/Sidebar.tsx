@@ -1,8 +1,9 @@
 import * as React from "react";
 import { createPortal } from "react-dom";
-
 import FocusLock from "react-focus-lock";
 import { RemoveScroll } from "react-remove-scroll";
+
+import InvoiceForm from "@/components/InvoiceForm";
 
 import styles from "./Sidebar.module.css";
 
@@ -17,7 +18,12 @@ function Sidebar({ handleDismiss }: SidebarProps) {
                 <div className={styles.wrapper}>
                     <div className={styles.backdrop} onClick={handleDismiss} />
                     <div className={styles.container}>
-                        <div className={styles.content}></div>
+                        <div className={styles.content}>
+                            <InvoiceForm
+                                formType={"create"}
+                                handleDismiss={handleDismiss}
+                            />
+                        </div>
                     </div>
                 </div>
             </RemoveScroll>
