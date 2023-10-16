@@ -6,6 +6,8 @@ import { ChevronLeft } from "react-feather";
 import InputField from "@/components/InputField";
 import ItemList from "@/components/ItemList";
 import Button from "@/components/Button";
+import useInvoiceForm from "@/hooks/useInvoiceForm";
+import { useInvoices } from "../InvoicesProvider";
 
 import styles from "./InvoiceForm.module.css";
 import globalStyles from "@/app/global.module.css";
@@ -16,6 +18,20 @@ type InvoiceFormProps = {
 };
 
 function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
+    const { handleCreateInvoice } = useInvoices();
+    const {
+        form,
+        handleChange,
+        handleSubmit,
+        handleAddItem,
+        handleChangeItem,
+        handleRemoveItem,
+        handleChangeStatus,
+    } = useInvoiceForm({
+        onSubmit: handleCreateInvoice,
+        onAfterSave: handleDismiss,
+    });
+
     const title = formType === "create" ? "New Invoice" : "Edit #XM9141";
 
     return (
@@ -36,12 +52,7 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
             <h1 className={clsx(globalStyles.textSizeM, styles.title)}>
                 {title}
             </h1>
-            <Form.Root
-                className={styles.form}
-                onSubmit={(event) => {
-                    event.preventDefault();
-                }}
-            >
+            <Form.Root className={styles.form} onSubmit={handleSubmit}>
                 <div className={styles.billFrom}>
                     <span
                         className={clsx(
@@ -54,26 +65,34 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                     <div className={styles.billAddressFields}>
                         <InputField
                             label="Street Address"
-                            name="bill-from-street-address"
+                            name="senderAddressStreet"
                             type="text"
+                            value={form.senderAddressStreet}
+                            onChange={handleChange}
                             wrapperClassName={styles.address}
                         />
                         <InputField
                             label="City"
-                            name="bill-from-city"
+                            name="senderAddressCity"
                             type="text"
+                            value={form.senderAddressCity}
+                            onChange={handleChange}
                             wrapperClassName={styles.city}
                         />
                         <InputField
                             label="Post Code"
-                            name="bill-from-post-code"
+                            name="senderAddressPostCode"
                             type="text"
+                            value={form.senderAddressPostCode}
+                            onChange={handleChange}
                             wrapperClassName={styles.postCode}
                         />
                         <InputField
                             label="Country"
-                            name="bill-from-country"
+                            name="senderAddressCountry"
                             type="text"
+                            value={form.senderAddressCountry}
+                            onChange={handleChange}
                             wrapperClassName={styles.country}
                         />
                     </div>
@@ -91,40 +110,52 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                         <InputField
                             required
                             label="Client’s Name"
-                            name="bill-to-client-name"
+                            name="clientName"
                             type="text"
                             valueMissingText="can’t be empty"
+                            value={form.clientName}
+                            onChange={handleChange}
                         />
                         <InputField
                             label="Client’s Email"
-                            name="bill-to-client-email"
+                            name="clientEmail"
                             type="email"
                             placeholder="e.g. email@example.com"
+                            value={form.clientEmail}
+                            onChange={handleChange}
                         />
                         <div className={styles.billAddressFields}>
                             <InputField
                                 label="Street Address"
-                                name="bill-to-street-address"
+                                name="clientAddressStreet"
                                 type="text"
                                 wrapperClassName={styles.address}
+                                value={form.clientAddressStreet}
+                                onChange={handleChange}
                             />
                             <InputField
                                 label="City"
-                                name="bill-to-city"
+                                name="clientAddressCity"
                                 type="text"
                                 wrapperClassName={styles.city}
+                                value={form.clientAddressCity}
+                                onChange={handleChange}
                             />
                             <InputField
                                 label="Post Code"
-                                name="bill-to-post-code"
+                                name="clientAddressPostCode"
                                 type="text"
                                 wrapperClassName={styles.postCode}
+                                value={form.clientAddressPostCode}
+                                onChange={handleChange}
                             />
                             <InputField
                                 label="Country"
-                                name="bill-to-country"
+                                name="clientAddressCountry"
                                 type="text"
                                 wrapperClassName={styles.country}
+                                value={form.clientAddressCountry}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -132,20 +163,26 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                         <div className={styles.dateAndPaymentTerms}>
                             <InputField
                                 label="Invoice Date"
-                                name="invoice-date"
+                                name="paymentDue"
                                 type="date"
+                                value={form.paymentDue}
+                                onChange={handleChange}
                             />
                             <InputField
                                 label="Payment Terms"
-                                name="payment-terms"
+                                name="paymentTerms"
                                 type="text"
+                                value={form.paymentTerms}
+                                onChange={handleChange}
                             />
                         </div>
                         <InputField
                             label="Project Description"
-                            name="project-description"
+                            name="projectDescription"
                             type="text"
                             placeholder="e.g. Graphic Design"
+                            value={form.projectDescription}
+                            onChange={handleChange}
                         />
                     </div>
                 </div>
@@ -159,7 +196,12 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                         Item List
                     </span>
                     <div className={styles.itemListContent}>
-                        <ItemList />
+                        <ItemList
+                            items={form.items}
+                            onAdd={handleAddItem}
+                            onChange={handleChangeItem}
+                            onDelete={handleRemoveItem}
+                        />
                     </div>
                 </div>
                 <div className={styles.actions}>
@@ -172,10 +214,20 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                     </Button>
                     <Form.Submit asChild>
                         <div className={styles.actionsSaveButtons}>
-                            <Button type="submit" styleType="secondary">
+                            <Button
+                                type="submit"
+                                styleType="secondary"
+                                onClick={() => handleChangeStatus("draft")}
+                            >
                                 Save as Draft
                             </Button>
-                            <Button type="submit" styleType="primary">
+                            <Button
+                                type="submit"
+                                styleType="primary"
+                                name="button-save-pending"
+                                value="pending"
+                                onClick={() => handleChangeStatus("pending")}
+                            >
                                 Save & Send
                             </Button>
                         </div>

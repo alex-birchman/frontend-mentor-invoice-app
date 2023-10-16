@@ -5,24 +5,29 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { InvoiceFormItem } from "@/types/invoice";
 
 import styles from "./ItemList.module.css";
 import globalStyles from "@/app/global.module.css";
 
-type Item = {
-    id: string;
-    name: string;
-    qty: number;
-    price: number;
-    total: number;
-};
-
-type ItemProps = Item & {
-    onChange: (id: string, param: keyof Item, value: Item[keyof Item]) => void;
+type ItemProps = InvoiceFormItem & {
+    onChange: (
+        id: string,
+        param: keyof InvoiceFormItem,
+        value: InvoiceFormItem[keyof InvoiceFormItem]
+    ) => void;
     onDelete: (id: string) => void;
 };
 
-function Item({ id, name, qty, price, total, onChange, onDelete }: ItemProps) {
+function Item({
+    id,
+    name,
+    quantity,
+    price,
+    total,
+    onChange,
+    onDelete,
+}: ItemProps) {
     const { isMobile } = useMediaQuery();
     return (
         <div className={styles.item}>
@@ -41,9 +46,9 @@ function Item({ id, name, qty, price, total, onChange, onDelete }: ItemProps) {
                 name="item-qty"
                 type="number"
                 min={1}
-                value={qty}
+                value={quantity}
                 onChange={(event) =>
-                    onChange(id, "qty", Number(event.target.value))
+                    onChange(id, "quantity", Number(event.target.value))
                 }
                 wrapperClassName={styles.colQty}
                 className={styles.itemColNumber}
@@ -98,42 +103,18 @@ function Item({ id, name, qty, price, total, onChange, onDelete }: ItemProps) {
     );
 }
 
-function ItemList() {
-    const [items, setItems] = React.useState<Item[]>([]);
-
-    function handleAddItem() {
-        const nextItems = [...items];
-        nextItems.push({
-            id: crypto.randomUUID(),
-            name: "",
-            qty: 1,
-            price: 0,
-            total: 0,
-        });
-        setItems(nextItems);
-    }
-
-    function handleRemoveItem(id: string) {
-        const nextItems = items.filter((item) => item.id !== id);
-        setItems(nextItems);
-    }
-
-    function handleChangeItem<K extends keyof Item>(
+type ItemListProps = {
+    items: InvoiceFormItem[];
+    onChange: (
         id: string,
-        param: K,
-        value: Item[K]
-    ) {
-        const nextItems = [...items];
-        const findItem = nextItems.find((item) => item.id === id);
+        param: keyof InvoiceFormItem,
+        value: InvoiceFormItem[keyof InvoiceFormItem]
+    ) => void;
+    onDelete: (id: string) => void;
+    onAdd: () => void;
+};
 
-        if (!findItem) return;
-
-        findItem[param] = (value + "") as Item[K];
-
-        findItem.total = findItem.qty * findItem.price;
-        setItems(nextItems);
-    }
-
+function ItemList({ items, onChange, onDelete, onAdd }: ItemListProps) {
     return (
         <div className={styles.wrapper}>
             <div className={styles.table}>
@@ -152,14 +133,14 @@ function ItemList() {
                     {items.map((item) => (
                         <Item
                             key={item.id}
-                            onChange={handleChangeItem}
-                            onDelete={handleRemoveItem}
+                            onChange={onChange}
+                            onDelete={onDelete}
                             {...item}
                         />
                     ))}
                 </div>
             </div>
-            <Button type="button" styleType="tertiary" onClick={handleAddItem}>
+            <Button type="button" styleType="tertiary" onClick={onAdd}>
                 + Add New Item
             </Button>
         </div>

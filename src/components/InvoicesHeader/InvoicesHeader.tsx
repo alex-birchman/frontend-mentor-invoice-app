@@ -5,22 +5,22 @@ import clsx from "clsx";
 
 import InvoicesFilter from "@/components/InvoicesFilter";
 import CreateInvoiceButton from "@/components/CreateInvoiceButton";
+import { useInvoices } from "@/components/InvoicesProvider";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
 import styles from "./InvoicesHeader.module.css";
 import globalStyles from "@/app/global.module.css";
 
-type InvoicesHeaderProps = {
-    invoiceNumber: number;
-};
-
-function InvoicesHeader({ invoiceNumber }: InvoicesHeaderProps) {
+function InvoicesHeader() {
     const { isMobile } = useMediaQuery();
+    const { invoices } = useInvoices();
+
+    const invoicesCount = invoices.length;
 
     const description =
-        invoiceNumber === 0
+        invoicesCount === 0
             ? "No invoices"
-            : `${isMobile ? "" : "There are"} ${invoiceNumber} total invoices`;
+            : `${isMobile ? "" : "There are"} ${invoicesCount} total invoices`;
 
     return (
         <div className={styles.wrapper}>

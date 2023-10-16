@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 
 import Menu from "@/components/Menu";
+import InvoicesProvider from "@/components/InvoicesProvider";
 
 import "./styles.css";
 import "./reset.css";
@@ -19,12 +20,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <body className={mainFont.className}>
-                <Menu />
-                <main>{children}</main>
-                <div id="sidebar-root" />
-            </body>
-        </html>
+        <InvoicesProvider>
+            <html lang="en">
+                <body className={mainFont.className}>
+                    <Menu />
+                    <main>{children}</main>
+                    <div id="sidebar-root" />
+                </body>
+            </html>
+        </InvoicesProvider>
     );
 }

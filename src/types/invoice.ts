@@ -28,3 +28,31 @@ export interface Invoice {
     items: Item[];
     total: number;
 }
+
+export interface InvoiceFormItem extends Item {
+    id: string;
+}
+
+export interface InvoiceForm {
+    senderAddressStreet: string;
+    senderAddressCity: string;
+    senderAddressPostCode: string;
+    senderAddressCountry: string;
+    clientName: string;
+    clientEmail: string;
+    clientAddressStreet: string;
+    clientAddressCity: string;
+    clientAddressPostCode: string;
+    clientAddressCountry: string;
+    paymentDue: string;
+    paymentTerms: number;
+    projectDescription: string;
+    items: InvoiceFormItem[];
+    status: InvoiceStatusType;
+}
+
+export interface InvoiceFormSubmit extends InvoiceForm {
+    id: string;
+    createdAt: string;
+    total: number;
+}
