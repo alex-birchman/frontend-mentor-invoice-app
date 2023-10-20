@@ -1,43 +1,51 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
 .labelWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .label {
-    color: var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.label[data-invalid="true"] {
+  color: var(--color-danger);
 }
 
 .labelEmpty {
-    color: var(--color-danger);
+  color: var(--color-danger);
 }
 
 .emptyText {
-    color: var(--color-danger);
-    font-size: 12px;
+  color: var(--color-danger);
+  font-size: 12px;
 }
 
 .input {
-    padding: 18px 20px 15px 20px;
-    border: 1px solid var(--color-secondary-light);
-    border-radius: 4px;
+  padding: 18px 20px 15px 20px;
+  border: 1px solid var(--color-secondary-light);
+  border-radius: 4px;
 }
 
 .input[data-invalid="true"] {
-    border: 1px solid var(--color-danger);
+  border: 1px solid var(--color-danger);
 }
 
 .input:focus {
-    outline: none;
-    border: 1px solid var(--color-primary);
+  outline: none;
+  border: 1px solid var(--color-primary);
+}
+
+.input[data-invalid="true"]:focus {
+  border: 1px solid var(--color-danger);
 }
 
 .inputEmpty {
-    border: 1px solid var(--color-danger);
+  border: 1px solid var(--color-danger);
 }
