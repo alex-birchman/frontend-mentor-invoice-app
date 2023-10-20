@@ -7,12 +7,17 @@ import InputField from "@/components/InputField";
 import ItemList from "@/components/ItemList";
 import Button from "@/components/Button";
 import InvoiceFormErrorMessage from "@/components/InvoiceFormErrorMessage";
+import Select from "@/components/Select";
+import { useInvoices } from "@/components/InvoicesProvider";
+import useScrollTo from "@/hooks/useScrollTo";
 import useInvoiceForm from "@/hooks/useInvoiceForm";
-import { useInvoices } from "../InvoicesProvider";
 
+import {
+  PAYMENT_TERM_OPTIONS,
+  PAYMENT_TERM_DEFAULT_VALUE,
+} from "./InvoiceForm.const";
 import styles from "./InvoiceForm.module.css";
 import globalStyles from "@/app/global.module.css";
-import useScrollTo from "@/hooks/useScrollTo";
 
 type InvoiceFormProps = {
   formType: "create" | "edit";
@@ -29,6 +34,7 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
     handleChangeItem,
     handleRemoveItem,
     handleChangeStatus,
+    handleSelectChange,
     getValidationErrors,
   } = useInvoiceForm({
     onSubmit: handleCreateInvoice,
@@ -172,12 +178,11 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
                 value={form.paymentDue}
                 onChange={handleChange}
               />
-              <InputField
+              <Select
                 label="Payment Terms"
-                name="paymentTerms"
-                type="text"
-                value={form.paymentTerms}
-                onChange={handleChange}
+                options={PAYMENT_TERM_OPTIONS}
+                defaultValue={PAYMENT_TERM_DEFAULT_VALUE}
+                onChange={handleSelectChange}
               />
             </div>
             <InputField

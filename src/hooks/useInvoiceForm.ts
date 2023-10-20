@@ -7,7 +7,10 @@ import {
   InvoiceFormValidation,
 } from "@/types/invoice";
 
-const ITEMS_ERROR_VALIDATION_MESSAGE = "An item must be added";
+import {
+  ITEMS_ERROR_VALIDATION_MESSAGE,
+  PAYMENT_TERM_DEFAULT_VALUE,
+} from "@/components/InvoiceForm/InvoiceForm.const";
 
 const inititalFormState: InvoiceForm = {
   senderAddressStreet: "",
@@ -21,7 +24,7 @@ const inititalFormState: InvoiceForm = {
   clientAddressPostCode: "",
   clientAddressCountry: "",
   paymentDue: "",
-  paymentTerms: 0,
+  paymentTerms: Number(PAYMENT_TERM_DEFAULT_VALUE),
   projectDescription: "",
   items: [],
   status: "draft",
@@ -69,6 +72,13 @@ function useInvoiceForm({
     setForm((prevForm) => ({
       ...prevForm,
       status,
+    }));
+  }
+
+  function handleSelectChange(value: string) {
+    setForm((prevForm) => ({
+      ...prevForm,
+      paymentTerms: Number(value),
     }));
   }
 
@@ -147,6 +157,7 @@ function useInvoiceForm({
     handleChangeItem,
     handleRemoveItem,
     handleChangeStatus,
+    handleSelectChange,
     getValidationErrors,
   };
 }
