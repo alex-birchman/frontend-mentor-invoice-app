@@ -23,7 +23,7 @@ const inititalFormState: InvoiceForm = {
   clientAddressCity: "",
   clientAddressPostCode: "",
   clientAddressCountry: "",
-  paymentDue: "",
+  paymentDue: new Date(),
   paymentTerms: Number(PAYMENT_TERM_DEFAULT_VALUE),
   projectDescription: "",
   items: [],
@@ -79,6 +79,13 @@ function useInvoiceForm({
     setForm((prevForm) => ({
       ...prevForm,
       paymentTerms: Number(value),
+    }));
+  }
+
+  function handleDateChange(date: Date) {
+    setForm((prevForm) => ({
+      ...prevForm,
+      paymentDue: date,
     }));
   }
 
@@ -153,6 +160,7 @@ function useInvoiceForm({
     form,
     handleChange,
     handleSubmit,
+    handleDateChange,
     handleAddItem,
     handleChangeItem,
     handleRemoveItem,

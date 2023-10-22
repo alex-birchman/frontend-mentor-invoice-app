@@ -1,61 +1,81 @@
 "use client";
 
 import * as React from "react";
+import { DateTime } from "luxon";
 
-import { Invoice, InvoiceForm, InvoiceFormSubmit } from "@/types/invoice";
+import {
+  Invoice,
+  InvoiceForm,
+  InvoiceFormSubmit,
+  InvoiceItem,
+} from "@/types/invoice";
 import { invoiceFormMapper } from "@/utils/formMappers";
 
 type InvoiceContextData = {
-    invoices: Invoice[];
-    handleCreateInvoice: (form: InvoiceForm) => void;
+  invoices: InvoiceItem[];
+  handleCreateInvoice: (form: InvoiceForm) => void;
 };
 
 const initialContextData: InvoiceContextData = {
-    invoices: [],
-    handleCreateInvoice: () => {},
+  invoices: [],
+  handleCreateInvoice: () => {},
 };
 
 const InvoicesContext =
-    React.createContext<InvoiceContextData>(initialContextData);
+  React.createContext<InvoiceContextData>(initialContextData);
 
 export const useInvoices = () => React.useContext(InvoicesContext);
 
 function InvoicesProvider({ children }: React.PropsWithChildren<{}>) {
-    const [invoices, setInvoices] = React.useState<Invoice[]>([]);
+  const [invoices, setInvoices] = React.useState<InvoiceItem[]>([]);
 
-    function handleCreateInvoice(form: InvoiceForm) {
-        const nextInvoices = [...invoices];
+  function handleCreateInvoice(form: InvoiceForm) {
+    const nextInvoices = [...invoices];
 
-        const id = "XR1923";
-        const createdAt = new Date().toISOString();
-        const total = form.items.reduce((acc, item) => {
-            return acc + item.total;
-        }, 0);
+    const id = "XR1923";
+    const createdAt = DateTime.now().toISODate();
+    const paymentDue = DateTime.fromJSDate(form.paymentDue).toISODate();
+    const total = form.items.reduce((acc, item) => {
+      return acc + item.total;
+    }, 0);
 
-        const invoiceFormToSubmit: InvoiceFormSubmit = {
-            ...form,
-            id,
-            createdAt,
-            total,
-        };
+    const invoiceFormToSubmit: InvoiceFormSubmit = {
+      ...form,
+      id,
+      createdAt,
+      paymentDue,
+      total,
+    };
 
-        const invoice: Invoice = invoiceFormMapper(invoiceFormToSubmit);
+    const invoice: Invoice = invoiceFormMapper(invoiceFormToSubmit);
 
-        nextInvoices.push(invoice);
+    const invoiceItem: InvoiceItem = {
+      ...invoice,
+      paymentDue: invoice.paymentDue
+        ? DateTime.fromISO(invoice.paymentDue).toFormat("dd MMM yyyy")
+        : undefined,
+      createdAt: invoice.createdAt
+        ? DateTime.fromISO(invoice.createdAt).toFormat("dd MMM yyyy")
+        : undefined,
+    };
 
-        setInvoices(nextInvoices);
-    }
+    console.log(invoiceItem);
 
-    return (
-        <InvoicesContext.Provider
-            value={{
-                invoices,
-                handleCreateInvoice,
-            }}
-        >
-            {children}
-        </InvoicesContext.Provider>
-    );
+    nextInvoices.push(invoiceItem);
+
+    setInvoices(nextInvoices);
+  }
+
+  return (
+    <InvoicesContext.Provider
+      value={{
+        invoices,
+        handleCreateInvoice,
+      }}
+    >
+      {children}
+    </InvoicesContext.Provider>
+  );
 }
 
 export default InvoicesProvider;

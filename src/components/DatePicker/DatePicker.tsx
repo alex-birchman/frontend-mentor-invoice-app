@@ -64,22 +64,35 @@ function DatePickerHeader({ date, decreaseMonth, increaseMonth }: any) {
   );
 }
 
-function DatePicker() {
+type DatePickerProps = {
+  value: Date | null | undefined;
+  onChange(date: Date | null): void;
+  label?: string;
+};
+
+function DatePicker(
+  { value, onChange, label }: DatePickerProps = {
+    value: new Date(),
+    onChange: () => {},
+  }
+) {
   const id = React.useId();
-  const [currentDate, setCurrentDate] = React.useState<Date | null>(new Date());
+
   return (
     <div className={styles.wrapper}>
-      <Label.Root
-        htmlFor={id}
-        className={clsx(globalStyles.textSizeBody, styles.label)}
-      >
-        Issue Date
-      </Label.Root>
+      {label && (
+        <Label.Root
+          htmlFor={id}
+          className={clsx(globalStyles.textSizeBody, styles.label)}
+        >
+          {label}
+        </Label.Root>
+      )}
       <ReactDatePicker
         disabledKeyboardNavigation
         id={id}
         portalId="calendar-root"
-        selected={currentDate}
+        selected={value}
         dateFormat="dd MMM yyyy"
         showPopperArrow={false}
         customInput={<DatePickerInput />}
@@ -89,12 +102,11 @@ function DatePicker() {
         monthClassName={() => styles.month}
         weekDayClassName={() => styles.datepickerHeaderDayNames}
         dayClassName={(date) => {
-          return currentDate &&
-            date.toDateString() === currentDate.toDateString()
+          return value && date.toDateString() === value.toDateString()
             ? clsx(globalStyles.textSizeS2, styles.calendarDaySelected)
             : clsx(globalStyles.textSizeS2, styles.calendarDay);
         }}
-        onChange={(date) => setCurrentDate(date)}
+        onChange={(date) => onChange(date)}
       />
     </div>
   );

@@ -16,8 +16,8 @@ export interface Item {
 
 export interface Invoice {
   id: string;
-  createdAt: string;
-  paymentDue: string;
+  createdAt: string | null;
+  paymentDue: string | null;
   description: string;
   paymentTerms: number;
   clientName: string;
@@ -27,6 +27,11 @@ export interface Invoice {
   clientAddress: Address;
   items: Item[];
   total: number;
+}
+
+export interface InvoiceItem extends Omit<Invoice, "createdAt" | "paymentDue"> {
+  createdAt: string | undefined | null;
+  paymentDue: string | undefined | null;
 }
 
 export interface InvoiceFormItem extends Item {
@@ -44,16 +49,18 @@ export interface InvoiceForm {
   clientAddressCity: string;
   clientAddressPostCode: string;
   clientAddressCountry: string;
-  paymentDue: string;
+  paymentDue: Date;
   paymentTerms: number;
   projectDescription: string;
   items: InvoiceFormItem[];
   status: InvoiceStatusType;
 }
 
-export interface InvoiceFormSubmit extends InvoiceForm {
+export interface InvoiceFormSubmit
+  extends Omit<InvoiceForm, "createdAt" | "paymentDue"> {
   id: string;
-  createdAt: string;
+  createdAt: string | null;
+  paymentDue: string | null;
   total: number;
 }
 
