@@ -1,0 +1,103 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  flex: 0 0 100%;
+}
+
+.label {
+  color: var(--color-secondary);
+}
+
+.datepicker {
+  width: 100%;
+}
+
+.datepickerInput {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  padding: 18px 16px 15px 20px;
+  border: 1px solid var(--color-secondary-light);
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.datepickerInput:focus {
+  border: 1px solid var(--color-primary);
+}
+
+.datepickerInputIcon {
+  max-width: fit-content;
+  padding: 0;
+}
+
+.datepickerHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.datepickerHeaderButton {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  cursor: pointer;
+}
+
+.datepickerHeaderIcon {
+  stroke: var(--color-primary);
+}
+
+.datepickerHeaderDayNames {
+  display: none;
+}
+
+.calendar {
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--color-white);
+  box-shadow: 0px 10px 20px 0px var(--color-shadow);
+}
+
+.calendarDay {
+  font-weight: 700;
+}
+
+.calendarDay:hover {
+  border: none;
+  background-color: var(--color-white);
+
+  color: var(--color-primary);
+}
+
+.calendarDaySelected {
+  border: none;
+  background-color: var(--color-white);
+
+  color: var(--color-primary);
+}
+
+.calendarDayOutsideMonth {
+  opacity: 0.0814;
+}
+
+.calendarDaySelected:hover {
+  border: none;
+  background-color: var(--color-white);
+
+  color: var(--color-primary);
+}
+
+.month {
+  margin: 2rem 1.25rem;
+}

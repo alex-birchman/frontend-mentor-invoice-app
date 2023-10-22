@@ -9,6 +9,7 @@ import Button from "@/components/Button";
 import InvoiceFormErrorMessage from "@/components/InvoiceFormErrorMessage";
 import Select from "@/components/Select";
 import { useInvoices } from "@/components/InvoicesProvider";
+import DatePicker from "@/components/DatePicker";
 import useScrollTo from "@/hooks/useScrollTo";
 import useInvoiceForm from "@/hooks/useInvoiceForm";
 
@@ -171,13 +172,14 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
           </div>
           <div className={styles.billAdditionalFields}>
             <div className={styles.dateAndPaymentTerms}>
-              <InputField
+              {/* <InputField
                 label="Invoice Date"
                 name="paymentDue"
                 type="date"
                 value={form.paymentDue}
                 onChange={handleChange}
-              />
+              /> */}
+              <DatePicker />
               <Select
                 label="Payment Terms"
                 options={PAYMENT_TERM_OPTIONS}

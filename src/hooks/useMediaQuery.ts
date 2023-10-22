@@ -1,45 +1,54 @@
 import React from "react";
 
+type Dimensions = {
+  width: number;
+  height: number;
+};
+
 type MediaQuery = {
-    desktopWidth: number;
-    tabletWidth: number;
+  desktopWidth: number;
+  tabletWidth: number;
 };
 
 const defaultMediaQuery: MediaQuery = {
-    desktopWidth: 1024,
-    tabletWidth: 768,
+  desktopWidth: 1024,
+  tabletWidth: 768,
 };
 
 function useMediaQuery({
-    desktopWidth,
-    tabletWidth,
+  desktopWidth,
+  tabletWidth,
 }: MediaQuery = defaultMediaQuery) {
-    const [dimensions, setDimensions] = React.useState(() => {
-        return {
-            width: window.innerWidth,
-            height: window.innerHeight,
-        };
-    });
+  const [dimensions, setDimensions] = React.useState<Dimensions | null>(() => {
+    return {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  });
 
-    const isDesktop = dimensions.width >= desktopWidth;
-    const isTablet =
-        dimensions.width >= tabletWidth && dimensions.width < desktopWidth;
-    const isMobile = dimensions.width < tabletWidth;
+  const isDesktop = dimensions && dimensions.width >= desktopWidth;
+  const isTablet =
+    dimensions &&
+    dimensions.width >= tabletWidth &&
+    dimensions.width < desktopWidth;
+  const isMobile = dimensions && dimensions.width < tabletWidth;
 
-    React.useEffect(() => {
-        function handleResize() {
-            setDimensions({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
-        }
+  const isLoading = dimensions === null;
 
-        window.addEventListener("resize", handleResize);
+  React.useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
 
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    window.addEventListener("resize", handleResize);
 
-    return { isDesktop, isTablet, isMobile };
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return { isDesktop, isTablet, isMobile, isLoading };
 }
 
 export default useMediaQuery;
