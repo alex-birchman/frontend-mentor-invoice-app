@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 
 import Menu from "@/components/Menu";
+import Sidebar from "@/components/Sidebar";
 import InvoicesProvider from "@/components/InvoicesProvider";
 
 import "./styles.css";
@@ -25,6 +26,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={mainFont.className}>
           <Menu />
+          <Sidebar />
           <main>{children}</main>
           <div id="sidebar-root" />
           <div id="calendar-root" />

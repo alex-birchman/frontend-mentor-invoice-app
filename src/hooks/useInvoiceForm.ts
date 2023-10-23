@@ -34,13 +34,18 @@ const initialFormValidationState: InvoiceFormValidation = {
   items: null,
 };
 
-function useInvoiceForm({
-  onSubmit,
-  onAfterSubmit,
-}: {
-  onSubmit: (form: InvoiceForm) => void;
-  onAfterSubmit?: () => void;
-}) {
+function useInvoiceForm(
+  {
+    onSubmit,
+    onAfterSubmit,
+  }: {
+    onSubmit: (form: InvoiceForm) => void;
+    onAfterSubmit?: () => void;
+  } = {
+    onSubmit: () => {},
+    onAfterSubmit: () => {},
+  }
+) {
   const [form, setForm] = React.useState<InvoiceForm>(inititalFormState);
   const [formValidation, setFormValidation] = React.useState(
     initialFormValidationState

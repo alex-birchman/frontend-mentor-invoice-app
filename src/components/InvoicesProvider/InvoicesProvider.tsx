@@ -3,22 +3,19 @@
 import * as React from "react";
 import { DateTime } from "luxon";
 
-import {
-  Invoice,
-  InvoiceForm,
-  InvoiceFormSubmit,
-  InvoiceItem,
-} from "@/types/invoice";
+import { Invoice, InvoiceForm, InvoiceFormSubmit } from "@/types/invoice";
 import { invoiceFormMapper } from "@/utils/formMappers";
 
 type InvoiceContextData = {
-  invoices: InvoiceItem[];
+  invoices: Invoice[];
   handleCreateInvoice: (form: InvoiceForm) => void;
+  getInvoiceById: (id: string) => Invoice | undefined;
 };
 
 const initialContextData: InvoiceContextData = {
   invoices: [],
   handleCreateInvoice: () => {},
+  getInvoiceById: () => undefined,
 };
 
 const InvoicesContext =
@@ -27,43 +24,28 @@ const InvoicesContext =
 export const useInvoices = () => React.useContext(InvoicesContext);
 
 function InvoicesProvider({ children }: React.PropsWithChildren<{}>) {
-  const [invoices, setInvoices] = React.useState<InvoiceItem[]>([]);
+  const [invoices, setInvoices] = React.useState<Invoice[]>([]);
 
   function handleCreateInvoice(form: InvoiceForm) {
     const nextInvoices = [...invoices];
 
     const id = "XR1923";
-    const createdAt = DateTime.now().toISODate();
-    const paymentDue = DateTime.fromJSDate(form.paymentDue).toISODate();
-    const total = form.items.reduce((acc, item) => {
-      return acc + item.total;
-    }, 0);
+    const createdAt = DateTime.now().toJSDate();
 
     const invoiceFormToSubmit: InvoiceFormSubmit = {
-      ...form,
       id,
       createdAt,
-      paymentDue,
-      total,
+      ...form,
     };
 
-    const invoice: Invoice = invoiceFormMapper(invoiceFormToSubmit);
-
-    const invoiceItem: InvoiceItem = {
-      ...invoice,
-      paymentDue: invoice.paymentDue
-        ? DateTime.fromISO(invoice.paymentDue).toFormat("dd MMM yyyy")
-        : undefined,
-      createdAt: invoice.createdAt
-        ? DateTime.fromISO(invoice.createdAt).toFormat("dd MMM yyyy")
-        : undefined,
-    };
-
-    console.log(invoiceItem);
-
-    nextInvoices.push(invoiceItem);
+    const invoice = invoiceFormMapper(invoiceFormToSubmit);
+    nextInvoices.push(invoice);
 
     setInvoices(nextInvoices);
+  }
+
+  function getInvoiceById(id: string) {
+    return invoices.find((invoice) => invoice.id === id);
   }
 
   return (
@@ -71,6 +53,7 @@ function InvoicesProvider({ children }: React.PropsWithChildren<{}>) {
       value={{
         invoices,
         handleCreateInvoice,
+        getInvoiceById,
       }}
     >
       {children}

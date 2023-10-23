@@ -22,7 +22,6 @@ export function invoiceFormMapper(form: InvoiceFormSubmit): Invoice {
     paymentDue: form.paymentDue,
     description: form.projectDescription,
     paymentTerms: form.paymentTerms,
-    total: form.total,
     items: form.items,
   };
 }

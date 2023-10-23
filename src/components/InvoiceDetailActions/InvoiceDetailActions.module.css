@@ -1,0 +1,26 @@
+.wrapper {
+  padding: 20px 32px;
+
+  border-radius: 0.5rem;
+  background: var(--color-praimary);
+  box-shadow: 0px 2px 10px -1px var(--color-shadow-light);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statusLabel {
+  color: var(--color-secondary);
+}

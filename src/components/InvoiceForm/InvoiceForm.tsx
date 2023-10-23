@@ -3,6 +3,7 @@ import * as Form from "@radix-ui/react-form";
 import clsx from "clsx";
 import { ChevronLeft } from "react-feather";
 
+import ButtonWithIcon from "@/components/ButtonWithIcon";
 import InputField from "@/components/InputField";
 import ItemList from "@/components/ItemList";
 import Button from "@/components/Button";
@@ -12,20 +13,23 @@ import { useInvoices } from "@/components/InvoicesProvider";
 import DatePicker from "@/components/DatePicker";
 import useScrollTo from "@/hooks/useScrollTo";
 import useInvoiceForm from "@/hooks/useInvoiceForm";
+import { InvoiceFormType } from "@/types/invoice";
 
-import {
-  PAYMENT_TERM_OPTIONS,
-  PAYMENT_TERM_DEFAULT_VALUE,
-} from "./InvoiceForm.const";
+import { PAYMENT_TERM_OPTIONS } from "./InvoiceForm.const";
 import styles from "./InvoiceForm.module.css";
 import globalStyles from "@/app/global.module.css";
 
 type InvoiceFormProps = {
-  formType: "create" | "edit";
   handleDismiss: () => void;
+  formType?: InvoiceFormType;
 };
 
-function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
+function InvoiceForm(
+  { formType, handleDismiss }: InvoiceFormProps = {
+    formType: "create",
+    handleDismiss: () => {},
+  }
+) {
   const { handleCreateInvoice } = useInvoices();
   const {
     form,
@@ -51,19 +55,22 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
 
   return (
     <div className={styles.wrapper}>
-      <button
+      <ButtonWithIcon
         type="button"
         className={clsx(globalStyles.textSizeS2, styles.backButton)}
         onClick={handleDismiss}
+        spacing={15}
+        iconLeft={
+          <ChevronLeft
+            size="1rem"
+            strokeWidth={2}
+            strokeLinecap="square"
+            className={styles.backButtonIcon}
+          />
+        }
       >
-        <ChevronLeft
-          size="1rem"
-          strokeWidth={2}
-          strokeLinecap="square"
-          className={styles.backButtonIcon}
-        />
-        <span>Go back</span>
-      </button>
+        Go back
+      </ButtonWithIcon>
       <h1 className={clsx(globalStyles.textSizeM, styles.title)}>{title}</h1>
       <Form.Root
         className={styles.form}
@@ -181,7 +188,7 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
               <Select
                 label="Payment Terms"
                 options={PAYMENT_TERM_OPTIONS}
-                defaultValue={PAYMENT_TERM_DEFAULT_VALUE}
+                defaultValue={String(form.paymentTerms)}
                 onChange={handleSelectChange}
               />
             </div>
@@ -214,29 +221,58 @@ function InvoiceForm({ formType, handleDismiss }: InvoiceFormProps) {
           </div>
         )}
         <div className={styles.actions}>
-          <Button type="button" styleType="tertiary" onClick={handleDismiss}>
-            Discard
-          </Button>
-          <Form.Submit asChild>
-            <div className={styles.actionsSaveButtons}>
+          {formType === "create" && (
+            <>
               <Button
-                type="submit"
-                styleType="secondary"
-                onClick={() => handleChangeStatus("draft")}
+                type="button"
+                styleType="tertiary"
+                onClick={handleDismiss}
               >
-                Save as Draft
+                Discard
               </Button>
+              <Form.Submit asChild>
+                <div className={styles.actionsSaveButtons}>
+                  <Button
+                    type="submit"
+                    styleType="secondary"
+                    onClick={() => handleChangeStatus("draft")}
+                  >
+                    Save as Draft
+                  </Button>
+                  <Button
+                    type="submit"
+                    styleType="primary"
+                    name="button-save-pending"
+                    value="pending"
+                    onClick={() => handleChangeStatus("pending")}
+                  >
+                    Save & Send
+                  </Button>
+                </div>
+              </Form.Submit>
+            </>
+          )}
+          {formType === "edit" && (
+            <>
               <Button
-                type="submit"
-                styleType="primary"
-                name="button-save-pending"
-                value="pending"
-                onClick={() => handleChangeStatus("pending")}
+                type="button"
+                styleType="tertiary"
+                onClick={handleDismiss}
               >
-                Save & Send
+                Cancel
               </Button>
-            </div>
-          </Form.Submit>
+              <Form.Submit asChild>
+                <Button
+                  type="submit"
+                  styleType="primary"
+                  name="button-save-changes"
+                  value="save-changes"
+                >
+                  Save Changes
+                </Button>
+              </Form.Submit>
+            </>
+          )}
         </div>
       </Form.Root>
     </div>
