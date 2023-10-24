@@ -3,8 +3,9 @@
 import * as React from "react";
 import { DateTime } from "luxon";
 
-import { Invoice, InvoiceForm, InvoiceFormSubmit } from "@/types/invoice";
-import { invoiceFormMapper } from "@/utils/formMappers";
+import { Invoice } from "@/types/invoice";
+import { InvoiceForm, InvoiceFormSubmit } from "@/types/invoiceForm";
+import { invoiceFromFormMapper } from "@/utils/formMappers";
 
 type InvoiceContextData = {
   invoices: Invoice[];
@@ -38,7 +39,7 @@ function InvoicesProvider({ children }: React.PropsWithChildren<{}>) {
       ...form,
     };
 
-    const invoice = invoiceFormMapper(invoiceFormToSubmit);
+    const invoice = invoiceFromFormMapper(invoiceFormToSubmit);
     nextInvoices.push(invoice);
 
     setInvoices(nextInvoices);

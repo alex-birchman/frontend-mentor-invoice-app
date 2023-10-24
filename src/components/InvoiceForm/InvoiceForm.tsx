@@ -2,6 +2,7 @@ import * as React from "react";
 import * as Form from "@radix-ui/react-form";
 import clsx from "clsx";
 import { ChevronLeft } from "react-feather";
+import { useSelector } from "react-redux";
 
 import ButtonWithIcon from "@/components/ButtonWithIcon";
 import InputField from "@/components/InputField";
@@ -9,28 +10,27 @@ import ItemList from "@/components/ItemList";
 import Button from "@/components/Button";
 import InvoiceFormErrorMessage from "@/components/InvoiceFormErrorMessage";
 import Select from "@/components/Select";
-import { useInvoices } from "@/components/InvoicesProvider";
 import DatePicker from "@/components/DatePicker";
 import useScrollTo from "@/hooks/useScrollTo";
 import useInvoiceForm from "@/hooks/useInvoiceForm";
-import { InvoiceFormType } from "@/types/invoice";
-
+import { useAppDispatch } from "@/store";
+import { addInvoice, updateInvoice } from "@/store/invoices";
+import { selectInvoiceFormType } from "@/store/invoiceForm";
+import { invoiceFromFormMapper } from "@/utils/formMappers";
+import { InvoiceForm } from "@/types/invoiceForm";
+import { getRandomInvoiceId } from "@/utils/invoice";
 import { PAYMENT_TERM_OPTIONS } from "./InvoiceForm.const";
+
 import styles from "./InvoiceForm.module.css";
 import globalStyles from "@/app/global.module.css";
 
 type InvoiceFormProps = {
+  initialState?: InvoiceForm;
   handleDismiss: () => void;
-  formType?: InvoiceFormType;
 };
 
-function InvoiceForm(
-  { formType, handleDismiss }: InvoiceFormProps = {
-    formType: "create",
-    handleDismiss: () => {},
-  }
-) {
-  const { handleCreateInvoice } = useInvoices();
+function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
+  const dispatch = useAppDispatch();
   const {
     form,
     handleChange,
@@ -43,15 +43,57 @@ function InvoiceForm(
     handleSelectChange,
     getValidationErrors,
   } = useInvoiceForm({
-    onSubmit: handleCreateInvoice,
+    initialState,
+    onSubmit: () => {},
     onAfterSubmit: handleDismiss,
   });
-  const title = formType === "create" ? "New Invoice" : "Edit #XM9141";
+  const formType = useSelector(selectInvoiceFormType);
   const errorMessages = getValidationErrors();
 
   const { ref: errorMessagesRef, triggerScroll } = useScrollTo({
     condition: errorMessages.length > 0,
   });
+
+  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    triggerScroll();
+    handleSubmit(event);
+
+    switch (formType) {
+      case "create": {
+        const formInvoice = invoiceFromFormMapper({
+          ...form,
+          id: getRandomInvoiceId(),
+          createdAt: new Date().toISOString(),
+          paymentDue: new Date(form.paymentDue).toISOString(),
+          total: form.items.reduce((acc, item) => acc + item.total, 0),
+        });
+        dispatch(addInvoice(formInvoice));
+      }
+      case "edit": {
+        if (!initialState) {
+          return;
+        }
+
+        const { id, createdAt } = initialState;
+
+        if (!(id && createdAt)) {
+          return;
+        }
+
+        const formInvoice = invoiceFromFormMapper({
+          ...form,
+          id,
+          createdAt: new Date(createdAt).toISOString(),
+          paymentDue: new Date(form.paymentDue).toISOString(),
+          total: form.items.reduce((acc, item) => acc + item.total, 0),
+        });
+        dispatch(updateInvoice({ id, changes: formInvoice }));
+      }
+    }
+  }
+
+  const title =
+    formType === "create" ? "New Invoice" : `Edit #${initialState?.id}`;
 
   return (
     <div className={styles.wrapper}>
@@ -72,13 +114,7 @@ function InvoiceForm(
         Go back
       </ButtonWithIcon>
       <h1 className={clsx(globalStyles.textSizeM, styles.title)}>{title}</h1>
-      <Form.Root
-        className={styles.form}
-        onSubmit={(event) => {
-          triggerScroll();
-          handleSubmit(event);
-        }}
-      >
+      <Form.Root className={styles.form} onSubmit={handleFormSubmit}>
         <div className={styles.billFrom}>
           <span className={clsx(globalStyles.textSizeS2, styles.billFromTitle)}>
             Bill From
@@ -182,7 +218,7 @@ function InvoiceForm(
             <div className={styles.dateAndPaymentTerms}>
               <DatePicker
                 label="Issue Date"
-                value={form.paymentDue}
+                value={new Date(form.paymentDue)}
                 onChange={handleDateChange}
               />
               <Select

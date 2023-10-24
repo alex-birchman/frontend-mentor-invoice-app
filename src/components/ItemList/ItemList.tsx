@@ -5,7 +5,7 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { InvoiceFormItem } from "@/types/invoice";
+import { InvoiceFormItem } from "@/types/invoiceForm";
 
 import styles from "./ItemList.module.css";
 import globalStyles from "@/app/global.module.css";

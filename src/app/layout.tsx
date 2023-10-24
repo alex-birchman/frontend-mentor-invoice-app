@@ -4,6 +4,7 @@ import { League_Spartan } from "next/font/google";
 import Menu from "@/components/Menu";
 import Sidebar from "@/components/Sidebar";
 import InvoicesProvider from "@/components/InvoicesProvider";
+import Providers from "@/app/providers";
 
 import "./styles.css";
 import "./reset.css";
@@ -22,16 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <InvoicesProvider>
-      <html lang="en">
-        <body className={mainFont.className}>
-          <Menu />
-          <Sidebar />
-          <main>{children}</main>
-          <div id="sidebar-root" />
-          <div id="calendar-root" />
-        </body>
-      </html>
-    </InvoicesProvider>
+    <Providers>
+      <InvoicesProvider>
+        <html lang="en">
+          <body className={mainFont.className}>
+            <Menu />
+            <Sidebar />
+            <main>{children}</main>
+            <div id="sidebar-root" />
+            <div id="calendar-root" />
+          </body>
+        </html>
+      </InvoicesProvider>
+    </Providers>
   );
 }

@@ -1,9 +1,7 @@
-"use client";
-
 import * as React from "react";
 import clsx from "clsx";
+import Link from "next/link";
 import { DateTime } from "luxon";
-import { useRouter } from "next/navigation";
 import { ChevronRight } from "react-feather";
 
 import InvoiceStatus from "@/components/InvoiceStatus";
@@ -24,23 +22,17 @@ function InvoiceItem({
   total,
   status,
 }: InvoiceItemProps) {
-  const router = useRouter();
-
   const formattedTotal = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: "GBP",
   }).format(total);
 
-  const humanizedPaymentDue =
-    DateTime.fromJSDate(paymentDue).toFormat("dd MMM yyyy");
+  const humanizedPaymentDue = DateTime.fromJSDate(
+    new Date(paymentDue)
+  ).toFormat("dd MMM yyyy");
 
   return (
-    <div
-      className={styles.wrapper}
-      onClick={() => {
-        router.push(`/invoice/${id}`);
-      }}
-    >
+    <Link href={`/invoice/${id}`} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.id}>
           <span className={styles.idHashTag}>#</span>
@@ -61,7 +53,7 @@ function InvoiceItem({
           className={styles.arrowIcon}
         />
       </div>
-    </div>
+    </Link>
   );
 }
 

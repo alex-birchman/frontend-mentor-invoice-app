@@ -2,25 +2,24 @@
 
 import * as React from "react";
 import clsx from "clsx";
+import { useSelector } from "react-redux";
 
 import InvoicesFilter from "@/components/InvoicesFilter";
 import CreateInvoiceButton from "@/components/CreateInvoiceButton";
-import { useInvoices } from "@/components/InvoicesProvider";
 
 import styles from "./InvoicesHeader.module.css";
 import globalStyles from "@/app/global.module.css";
+import { selectTotalInvoices } from "@/store/invoices";
 
 function InvoicesHeader() {
-  const { invoices } = useInvoices();
-
-  const invoicesCount = invoices.length;
+  const totatlInvoices = useSelector(selectTotalInvoices);
 
   const descriptionDesktop =
-    invoicesCount === 0
+    totatlInvoices === 0
       ? "No invoices"
-      : `There are ${invoicesCount} total invoices`;
+      : `There are ${totatlInvoices} total invoices`;
   const descriptionMobile =
-    invoicesCount === 0 ? "No invoices" : `${invoicesCount} total invoices`;
+    totatlInvoices === 0 ? "No invoices" : `${totatlInvoices} total invoices`;
 
   return (
     <div className={styles.wrapper}>

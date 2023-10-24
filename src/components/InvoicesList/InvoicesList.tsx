@@ -1,30 +1,34 @@
 "use client";
 
 import * as React from "react";
+import { useSelector } from "react-redux";
 
 import InvoiceItem from "@/components/InvoiceItem";
 import InvoicesNotFound from "@/components/InvoicesNotFound";
-import { useInvoices } from "@/components/InvoicesProvider";
+import { selectAllInvoices } from "@/store/invoices";
 
 import styles from "./InvoicesList.module.css";
 
 function InvoicesList() {
-    const { invoices } = useInvoices();
+  const invoices = useSelector(selectAllInvoices);
 
-    if (invoices.length === 0) {
-        return <InvoicesNotFound />;
-    }
-    return (
-        <div className={styles.wrapper}>
-            <ul className={styles.list}>
-                {invoices.map((invoice) => (
-                    <li key={invoice.id}>
-                        <InvoiceItem {...invoice} />
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+  console.log("invoices", JSON.stringify(invoices));
+
+  if (invoices.length === 0) {
+    return <InvoicesNotFound />;
+  }
+
+  return (
+    <div className={styles.wrapper}>
+      <ul className={styles.list}>
+        {invoices.map((invoice) => (
+          <li key={invoice.id}>
+            <InvoiceItem {...invoice} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default InvoicesList;

@@ -1,0 +1,130 @@
+.wrapper {
+  padding: 48px;
+  padding-top: 50px;
+
+  border-radius: 0.5rem;
+  background: var(--color-white);
+  box-shadow: 0px 10px 10px -10px var(--color-shadow-light);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.idDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.idDescriptionAndSenderAddress {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding-bottom: 20px;
+}
+
+.id {
+  grid-area: id;
+}
+
+.idHashTag {
+  color: var(--color-secondary);
+  font-weight: 700;
+}
+
+.description {
+  grid-area: description;
+
+  line-height: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.senderAddress {
+  grid-area: senderAddress;
+
+  color: var(--color-secondary);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.datesClientAddressEmail {
+  display: flex;
+  gap: 20px;
+}
+
+.createdDateAndPaymentDueDate {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.createdDate {
+  grid-area: createdDate;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  white-space: nowrap;
+}
+
+.createdDateLabel {
+  line-height: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.paymentDueDate {
+  grid-area: paymentDueDate;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.paymentDueDateLabel {
+  line-height: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.clientAddress {
+  grid-area: clientAddress;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  padding-left: 100px;
+}
+
+.clientAddressLabel {
+  line-height: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.clientAddressInfo {
+  padding-top: 7px;
+  color: var(--color-secondary);
+}
+
+.clientEmail {
+  grid-area: clientEmail;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  word-break: break-all;
+
+  padding-left: 100px;
+}
+
+.clientEmailLabel {
+  line-height: 0.9375rem;
+  color: var(--color-secondary);
+}
+
+.items {
+  padding-top: 44px;
+}

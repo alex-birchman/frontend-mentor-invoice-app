@@ -19,3 +19,4 @@ export const PAYMENT_TERM_OPTIONS = [
 ];
 
 export const ITEMS_ERROR_VALIDATION_MESSAGE = "An item must be added";
+export const INVOICE_STATUS_DEFAULT_VALUE = "draft";

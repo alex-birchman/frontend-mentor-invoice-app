@@ -1,11 +1,11 @@
 import * as React from "react";
 
+import { InvoiceStatusType } from "@/types/invoice";
 import {
   InvoiceForm,
   InvoiceFormItem,
-  InvoiceStatusType,
   InvoiceFormValidation,
-} from "@/types/invoice";
+} from "@/types/invoiceForm";
 
 import {
   ITEMS_ERROR_VALIDATION_MESSAGE,
@@ -34,19 +34,21 @@ const initialFormValidationState: InvoiceFormValidation = {
   items: null,
 };
 
+type UseInvoiceForm = {
+  initialState?: InvoiceForm;
+  onSubmit: (form: InvoiceForm) => void;
+  onAfterSubmit?: () => void;
+};
+
 function useInvoiceForm(
-  {
-    onSubmit,
-    onAfterSubmit,
-  }: {
-    onSubmit: (form: InvoiceForm) => void;
-    onAfterSubmit?: () => void;
-  } = {
+  { initialState, onSubmit, onAfterSubmit }: UseInvoiceForm = {
     onSubmit: () => {},
     onAfterSubmit: () => {},
   }
 ) {
-  const [form, setForm] = React.useState<InvoiceForm>(inititalFormState);
+  const [form, setForm] = React.useState<InvoiceForm>(() => {
+    return initialState ?? inititalFormState;
+  });
   const [formValidation, setFormValidation] = React.useState(
     initialFormValidationState
   );

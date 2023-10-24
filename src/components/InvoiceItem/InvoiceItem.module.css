@@ -1,123 +1,128 @@
 .wrapper {
-    padding: 16px 24px 16px 32px;
-    background: var(--color-white);
-    border-radius: 8px;
-    margin-bottom: 16px;
+  display: block;
+  padding: 16px 24px 16px 32px;
+  background: var(--color-white);
+  border-radius: 8px;
+  margin-bottom: 16px;
 
-    box-shadow: 0px 10px 10px -10px var(--color-shadow-light);
-    cursor: pointer;
+  box-shadow: 0px 10px 10px -10px var(--color-shadow-light);
+  cursor: pointer;
+
+  text-decoration: none;
+  color: inherit;
 }
 
 .content {
-    display: grid;
-    grid-template-columns: 120px 120px repeat(2, 1fr) 125px 16px;
-    grid-template-rows: 40px;
-    grid-template-areas: "id paymentDue clientName totalSum status arrowIcon";
-    align-items: center;
+  display: grid;
+  grid-template-columns: 120px 120px repeat(2, 1fr) 125px 16px;
+  grid-template-rows: 40px;
+  grid-template-areas: "id paymentDue clientName totalSum status arrowIcon";
+  align-items: center;
 }
 
 .id {
-    grid-area: id;
-    text-align: left;
+  grid-area: id;
+  text-align: left;
 
-    padding-right: 40px;
+  padding-right: 40px;
 }
 
 .idHashTag {
-    color: var(--color-secondary);
-    font-weight: 700;
+  color: var(--color-secondary);
+  font-weight: 700;
 }
 
 .idNumber {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .paymentDue {
-    grid-area: paymentDue;
-    text-align: left;
-    color: var(--color-secondary);
+  grid-area: paymentDue;
+  text-align: left;
+  color: var(--color-secondary);
+  white-space: nowrap;
 
-    padding-right: 40px;
+  padding-right: 40px;
 }
 
 .clientName {
-    grid-area: clientName;
-    text-align: left;
-    white-space: nowrap;
-    color: var(--color-secondary);
+  grid-area: clientName;
+  text-align: left;
+  white-space: nowrap;
+  color: var(--color-secondary);
 
-    padding-right: 40px;
+  padding-right: 40px;
 }
 
 .totalSum {
-    grid-area: totalSum;
-    text-align: right;
+  grid-area: totalSum;
+  text-align: right;
 
-    padding-right: 40px;
+  padding-right: 40px;
 }
 
 .status {
-    grid-area: status;
-    padding-right: 20px;
+  grid-area: status;
+  padding-right: 20px;
 }
 
 .arrowIcon {
-    display: block;
-    grid-area: arrowIcon;
-    stroke: var(--color-primary);
+  display: block;
+  grid-area: arrowIcon;
+  stroke: var(--color-primary);
 }
 
 @media (min-width: 1024px) {
-    .wrapper:hover {
-        border: 1px solid var(--color-primary);
-        padding: 15px 23px 15px 31px;
-    }
+  .wrapper:hover {
+    border: 1px solid var(--color-primary);
+    padding: 15px 23px 15px 31px;
+  }
 }
 
 @media (max-width: 768px) {
-    .wrapper {
-        padding: 25px 24px 22px 24px;
-    }
+  .wrapper {
+    padding: 25px 24px 22px 24px;
+  }
 
-    .content {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 15px 24px 48px;
-        grid-template-areas:
-            "id clientName"
-            ". ."
-            "paymentDue status"
-            "totalSum status";
-    }
+  .content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 15px 24px 48px;
+    grid-template-areas:
+      "id clientName"
+      ". ."
+      "paymentDue status"
+      "totalSum status";
+  }
 
-    .id {
-        padding: 0;
-    }
+  .id {
+    padding: 0;
+  }
 
-    .paymentDue {
-        padding: 0;
-    }
+  .paymentDue {
+    padding: 0;
+  }
 
-    .clientName {
-        padding: 0;
-        text-align: right;
-    }
+  .clientName {
+    padding: 0;
+    text-align: right;
+  }
 
-    .totalSum {
-        text-align: left;
-        padding: 0;
-    }
+  .totalSum {
+    text-align: left;
+    padding: 0;
+  }
 
-    .status {
-        padding: 0;
-        width: 105px;
-        margin-top: auto;
-        margin-left: auto;
-    }
+  .status {
+    padding: 0;
+    width: 105px;
+    margin-top: auto;
+    margin-left: auto;
+  }
 
-    .arrowIcon {
-        display: none;
-        grid-area: arrowIcon;
-        stroke: var(--color-primary);
-    }
+  .arrowIcon {
+    display: none;
+    grid-area: arrowIcon;
+    stroke: var(--color-primary);
+  }
 }

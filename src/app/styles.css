@@ -21,6 +21,7 @@
   --color-button-secondary: hsla(231, 20%, 27%, 1);
   --color-button-tertiary: hsla(231, 67%, 96%, 1);
   --color-button-tertiary-hover: hsla(231, 73%, 93%, 1);
+  --color-invoice-detail-items: hsla(231, 67%, 99%, 1);
 
   /* Status colors */
   --color-status-paid: hsla(160, 67%, 52%);

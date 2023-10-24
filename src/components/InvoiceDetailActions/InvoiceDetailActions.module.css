@@ -2,8 +2,8 @@
   padding: 20px 32px;
 
   border-radius: 0.5rem;
-  background: var(--color-praimary);
-  box-shadow: 0px 2px 10px -1px var(--color-shadow-light);
+  background: var(--color-white);
+  box-shadow: 0px 10px 10px -10px var(--color-shadow-light);
 
   display: flex;
   justify-content: space-between;
