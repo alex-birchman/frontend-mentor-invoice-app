@@ -106,6 +106,8 @@ function DatePicker(
         selected={value}
         dateFormat="dd MMM yyyy"
         showPopperArrow={false}
+        // React.createElelement is used to avoid the following type errors:
+        // https://github.com/Hacker0x01/react-datepicker/issues/2165
         customInput={React.createElement(DatePickerInput)}
         renderCustomHeader={(params) => <DatePickerHeader {...params} />}
         wrapperClassName={styles.datepicker}
