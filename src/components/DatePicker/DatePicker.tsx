@@ -8,9 +8,18 @@ import { ChevronLeft, ChevronRight } from "react-feather";
 import styles from "./DatePicker.module.css";
 import globalStyles from "@/app/global.module.css";
 
-function DatePickerInput({ value, onClick }: any) {
-  return (
+type DatePickerInputProps = {
+  value: string;
+  onClick: () => void;
+};
+
+const DatePickerInput = React.forwardRef(
+  (
+    { value, onClick }: DatePickerInputProps,
+    ref: React.ForwardedRef<HTMLButtonElement>
+  ) => (
     <button
+      ref={ref}
       type="button"
       className={clsx(globalStyles.textSizeS2, styles.datepickerInput)}
       onClick={onClick}
@@ -24,8 +33,10 @@ function DatePickerInput({ value, onClick }: any) {
         className={styles.datepickerInputIcon}
       />
     </button>
-  );
-}
+  )
+);
+
+DatePickerInput.displayName = "DatePickerInput";
 
 function DatePickerHeader({ date, decreaseMonth, increaseMonth }: any) {
   return (
@@ -95,7 +106,7 @@ function DatePicker(
         selected={value}
         dateFormat="dd MMM yyyy"
         showPopperArrow={false}
-        customInput={<DatePickerInput />}
+        customInput={React.createElement(DatePickerInput)}
         renderCustomHeader={(params) => <DatePickerHeader {...params} />}
         wrapperClassName={styles.datepicker}
         calendarClassName={styles.calendar}
