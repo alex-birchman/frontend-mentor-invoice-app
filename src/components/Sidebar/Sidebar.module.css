@@ -1,55 +1,83 @@
 .wrapper {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-content: left;
-    padding: 0;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: left;
+  padding: 0;
 }
 
 .backdrop {
-    position: absolute;
-    inset: 0;
-    background: hsl(0deg 0% 0% / 0.5);
+  position: absolute;
+  inset: 0;
+  background: hsl(0deg 0% 0% / 0.5);
+
+  animation-duration: 1000ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+  animation-name: opacityFadeOut;
 }
 
 .container {
-    position: relative;
-    width: 720px;
-    background: var(--color-white);
-    margin-left: 0;
-    border-radius: 0 20px 20px 0;
-    padding-left: 100px;
-    overflow-y: scroll;
+  position: relative;
+  width: 720px;
+  background: var(--color-white);
+  margin-left: 0;
+  border-radius: 0 20px 20px 0;
+  padding-left: 100px;
+  overflow-y: scroll;
+
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  animation-name: slideLeftToRight;
 }
 
 .content {
-    position: relative;
-    padding: 60px 56px 32px 56px;
+  position: relative;
+  padding: 60px 56px 32px 56px;
+}
+
+@keyframes slideLeftToRight {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes opacityFadeOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1024px) {
-    .wrapper {
-        padding-top: 80px;
-    }
+  .wrapper {
+    padding-top: 80px;
+  }
 
-    .container {
-        width: 615px;
-        padding: 0;
-    }
+  .container {
+    width: 615px;
+    padding: 0;
+  }
 }
 
 @media (max-width: 768px) {
-    .wrapper {
-        padding-top: 72px;
-    }
+  .wrapper {
+    padding-top: 72px;
+  }
 
-    .container {
-        width: 100%;
-        padding: 0;
-        border-radius: 0;
-    }
+  .container {
+    width: 100%;
+    padding: 0;
+    border-radius: 0;
+  }
 
-    .content {
-        padding: 32px 24px 32px 24px;
-    }
+  .content {
+    padding: 32px 24px 32px 24px;
+  }
 }
