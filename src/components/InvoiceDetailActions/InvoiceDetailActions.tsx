@@ -49,16 +49,31 @@ function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
         <div className={clsx(globalStyles.textSizeBody, styles.statusLabel)}>
           Status
         </div>
-        <InvoiceStatus status={invoiceFormState?.status || "draft"} />
+        <InvoiceStatus
+          status={invoiceFormState?.status || "draft"}
+          className={styles.statusValue}
+        />
       </div>
       <div className={styles.actions}>
-        <Button styleType="tertiary" onClick={handleEditInvoice}>
+        <Button
+          styleType="tertiary"
+          className={styles.actionsEdit}
+          onClick={handleEditInvoice}
+        >
           Edit
         </Button>
-        <Button styleType="danger" onClick={handleDeleteInvoice}>
+        <Button
+          styleType="danger"
+          className={styles.actionsDelete}
+          onClick={handleDeleteInvoice}
+        >
           Delete
         </Button>
-        <Button styleType="primary" onClick={handleMarkAsPaid}>
+        <Button
+          styleType="primary"
+          className={styles.actionsPaid}
+          onClick={handleMarkAsPaid}
+        >
           Mark as Paid
         </Button>
       </div>

@@ -4,6 +4,7 @@
   width: 100%;
   max-width: var(--content-width);
   padding-top: 65px;
+  padding-bottom: 54px;
   margin: 0 auto;
 }
 
@@ -13,4 +14,10 @@
 
 .detail {
   padding-top: 24px;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding-bottom: 140px;
+  }
 }

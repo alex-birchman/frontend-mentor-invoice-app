@@ -24,3 +24,44 @@
 .statusLabel {
   color: var(--color-secondary);
 }
+
+.statusValue {
+  width: 104px;
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 24px;
+  }
+
+  .status {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    justify-content: space-between;
+    padding: 21px 24px 22px 24px;
+    background: var(--color-white);
+  }
+
+  .actionsEdit {
+    max-width: 75px;
+    flex: 1;
+  }
+
+  .actionsDelete {
+    max-width: 90px;
+    flex: 1;
+  }
+
+  .actionsPaid {
+    max-width: 150px;
+    flex: 1;
+  }
+}

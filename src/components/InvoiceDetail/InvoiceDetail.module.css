@@ -128,3 +128,37 @@
 .items {
   padding-top: 44px;
 }
+
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 24px;
+  }
+
+  .idDescriptionAndSenderAddress {
+    flex-direction: column;
+    gap: 30px;
+
+    padding-bottom: 30px;
+  }
+
+  .datesClientAddressEmail {
+    flex-wrap: wrap;
+  }
+
+  .clientEmail {
+    padding-top: 10px;
+    padding-left: 0;
+  }
+
+  .senderAddress {
+    text-align: left;
+  }
+
+  .clientAddress {
+    padding-left: 40px;
+  }
+
+  .items {
+    padding-top: 38px;
+  }
+}

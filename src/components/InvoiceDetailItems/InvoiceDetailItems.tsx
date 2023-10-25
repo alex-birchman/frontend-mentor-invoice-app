@@ -42,10 +42,15 @@ function InvoiceDetailItems({ items }: InvoiceDetailItemsProps) {
                 key={item.id}
                 className={clsx(globalStyles.textSizeS, styles.item)}
               >
-                <div>{item.name}</div>
-                <div>{item.quantity}</div>
-                <div>{formattedPrice}</div>
-                <div>{formattedTotal}</div>
+                <div className={styles.nameAndQuantityPrice}>
+                  <div className={styles.itemName}>{item.name}</div>
+                  <div className={styles.itemQuantityAndPrice}>
+                    {item.quantity} x {formattedPrice}
+                  </div>
+                </div>
+                <div className={styles.itemQuantity}>{item.quantity}</div>
+                <div className={styles.itemPrice}>{formattedPrice}</div>
+                <div className={styles.itemTotal}>{formattedTotal}</div>
               </li>
             );
           })}

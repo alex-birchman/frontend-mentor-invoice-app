@@ -59,6 +59,14 @@
   color: var(--color-secondary);
 }
 
+.nameAndQuantityPrice {
+  display: flex;
+}
+
+.itemQuantityAndPrice {
+  display: none;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
@@ -68,4 +76,33 @@
   border-radius: 0 0 0.5rem 0.5rem;
   background: var(--color-status-draft);
   color: var(--color-white);
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 24px;
+  }
+
+  .itemQuantity {
+    display: none;
+  }
+
+  .itemPrice {
+    display: none;
+  }
+
+  .nameAndQuantityPrice {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .itemQuantityAndPrice {
+    display: flex;
+    color: var(--color-secondary);
+  }
+
+  .header {
+    display: none;
+  }
 }
