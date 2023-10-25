@@ -1,0 +1,40 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+
+  background-color: hsl(0deg 0% 0% / 0.5);
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: var(--color-white);
+
+  border-radius: 0.5rem;
+  padding: 48px;
+  max-width: 480px;
+}
+
+.description {
+  color: var(--color-secondary);
+  padding-top: 12px;
+}
+
+.buttons {
+  margin-top: 14px;
+}
+
+@media (max-width: 480px) {
+  .content {
+    min-width: 327px;
+    padding: 32px;
+  }
+}

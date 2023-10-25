@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 
 import InvoiceStatus from "@/components/InvoiceStatus";
 import Button from "@/components/Button";
+import Modal from "@/components/Modal";
+import useToggle from "@/hooks/useToggle";
 import { useAppDispatch } from "@/store";
 import { selectInvoiceFormStateById } from "@/store/invoices";
 import { setSidebarContentView, toggleSidebar } from "@/store/sidebar";
@@ -23,6 +25,7 @@ type InvoiceDetailActionsProps = {
 function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const [isOpen, toggleModal] = useToggle(false);
   const invoiceFormState = useSelector(selectInvoiceFormStateById)(invoiceId);
 
   function handleEditInvoice() {
@@ -44,40 +47,63 @@ function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.status}>
-        <div className={clsx(globalStyles.textSizeBody, styles.statusLabel)}>
-          Status
+    <>
+      <div className={styles.wrapper}>
+        <div className={styles.status}>
+          <div className={clsx(globalStyles.textSizeBody, styles.statusLabel)}>
+            Status
+          </div>
+          <InvoiceStatus
+            status={invoiceFormState?.status || "draft"}
+            className={styles.statusValue}
+          />
         </div>
-        <InvoiceStatus
-          status={invoiceFormState?.status || "draft"}
-          className={styles.statusValue}
-        />
+        <div className={styles.actions}>
+          <Button
+            styleType="tertiary"
+            className={styles.actionsEdit}
+            onClick={handleEditInvoice}
+          >
+            Edit
+          </Button>
+          <Modal
+            isOpen={isOpen as boolean}
+            toggleOpen={toggleModal as () => void}
+            trigger={
+              <Button styleType="danger" className={styles.actionsDelete}>
+                Delete
+              </Button>
+            }
+            title="Confirm Deletion"
+            description={`Are you sure you want to delete invoice #${invoiceId}? This action cannot be undone.`}
+            buttons={
+              <div className={styles.modalButtons}>
+                <Button
+                  styleType="tertiary"
+                  onClick={toggleModal as () => void}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  styleType="danger"
+                  className={styles.actionsDelete}
+                  onClick={handleDeleteInvoice}
+                >
+                  Delete
+                </Button>
+              </div>
+            }
+          />
+          <Button
+            styleType="primary"
+            className={styles.actionsPaid}
+            onClick={handleMarkAsPaid}
+          >
+            Mark as Paid
+          </Button>
+        </div>
       </div>
-      <div className={styles.actions}>
-        <Button
-          styleType="tertiary"
-          className={styles.actionsEdit}
-          onClick={handleEditInvoice}
-        >
-          Edit
-        </Button>
-        <Button
-          styleType="danger"
-          className={styles.actionsDelete}
-          onClick={handleDeleteInvoice}
-        >
-          Delete
-        </Button>
-        <Button
-          styleType="primary"
-          className={styles.actionsPaid}
-          onClick={handleMarkAsPaid}
-        >
-          Mark as Paid
-        </Button>
-      </div>
-    </div>
+    </>
   );
 }
 

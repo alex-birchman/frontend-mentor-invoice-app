@@ -32,6 +32,7 @@ export default function RootLayout({
             <main>{children}</main>
             <div id="sidebar-root" />
             <div id="calendar-root" />
+            <div id="modal-root" />
           </body>
         </html>
       </InvoicesProvider>
