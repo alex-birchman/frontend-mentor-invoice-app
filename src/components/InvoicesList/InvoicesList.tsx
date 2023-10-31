@@ -5,14 +5,12 @@ import { useSelector } from "react-redux";
 
 import InvoiceItem from "@/components/InvoiceItem";
 import InvoicesNotFound from "@/components/InvoicesNotFound";
-import { selectAllInvoices } from "@/store/invoices";
+import { selectInvoicesByFilters } from "@/store/invoices";
 
 import styles from "./InvoicesList.module.css";
 
 function InvoicesList() {
-  const invoices = useSelector(selectAllInvoices);
-
-  console.log("invoices", JSON.stringify(invoices));
+  const invoices = useSelector(selectInvoicesByFilters);
 
   if (invoices.length === 0) {
     return <InvoicesNotFound />;

@@ -1,26 +1,27 @@
 "use client";
 
 import * as React from "react";
+import { useSelector } from "react-redux";
 import clsx from "clsx";
 import { Check, ChevronDown, ChevronUp } from "react-feather";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
+import { useAppDispatch } from "@/store";
+import {
+  selectInvoicesFilters,
+  InvoicesFilters,
+  toggleInvoicesFilter,
+  selectSelectedCountFilter,
+} from "@/store/invoices";
+
 import styles from "./InvoicesFilter.module.css";
 import globalStyles from "@/app/global.module.css";
 
-const initialFilterStatuses: Record<string, boolean> = {
-  draft: false,
-  pending: false,
-  paid: false,
-};
-
 function FilterSatatuses() {
-  const [filterStatuses, setFilterStatuses] = React.useState(
-    initialFilterStatuses
-  );
-
-  const filtersList = Object.keys(filterStatuses);
+  const dispatch = useAppDispatch();
+  const filters = useSelector(selectInvoicesFilters);
+  const filtersList = Object.keys(filters) as InvoicesFilters[];
 
   return (
     <form>
@@ -29,12 +30,14 @@ function FilterSatatuses() {
           <Checkbox.Root
             className={styles.checkboxRoot}
             id={option}
-            checked={filterStatuses[option] === true}
+            checked={filters[option] === true}
             onCheckedChange={(checked) => {
-              setFilterStatuses((prevFilterStatuses) => ({
-                ...prevFilterStatuses,
-                [option]: checked as boolean,
-              }));
+              dispatch(
+                toggleInvoicesFilter({
+                  filter: option,
+                  value: checked as boolean,
+                })
+              );
             }}
             value={option}
           >
@@ -61,16 +64,18 @@ function FilterSatatuses() {
 
 function InvoicesFilter() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const selectedCountFilters = useSelector(selectSelectedCountFilter);
 
   return (
     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenu.Trigger asChild>
         <div className={styles.selector}>
           <p className={clsx(globalStyles.textSizeS, styles.titleDesktop)}>
-            Filter by status
+            Filter by status{" "}
+            {selectedCountFilters > 0 && `(${selectedCountFilters})`}
           </p>
           <p className={clsx(globalStyles.textSizeS, styles.titleMobile)}>
-            Filter
+            Filter {selectedCountFilters > 0 && `(${selectedCountFilters})`}
           </p>
           {isOpen ? (
             <ChevronUp
