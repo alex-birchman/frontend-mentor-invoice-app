@@ -20,12 +20,17 @@ import globalStyles from "@/app/global.module.css";
 
 type InvoiceDetailActionsProps = {
   invoiceId: string;
-};
+} & React.ComponentPropsWithRef<"div">;
 
-function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
+const InvoiceDetailActions = React.forwardRef(function InvoiceDetailActions(
+  { invoiceId }: InvoiceDetailActionsProps,
+  forwardedRef: React.Ref<HTMLDivElement>
+) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [isOpen, toggleModal] = useToggle(false);
+
+  const [isShowActionsShadow, setIsShowActionsShadow] = React.useState(false);
   const invoiceFormState = useSelector(selectInvoiceFormStateById)(invoiceId);
 
   function handleEditInvoice() {
@@ -46,19 +51,43 @@ function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
     dispatch(markInvoiceAsPaid(invoiceId));
   }
 
+  React.useEffect(() => {
+    const refObject = forwardedRef as React.RefObject<HTMLDivElement>;
+
+    if (!refObject || !refObject.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+
+      setIsShowActionsShadow(!entry.isIntersecting);
+    });
+
+    observer.observe(refObject.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [forwardedRef]);
+
   return (
-    <>
-      <div className={styles.wrapper}>
-        <div className={styles.status}>
-          <div className={clsx(globalStyles.textSizeBody, styles.statusLabel)}>
-            Status
-          </div>
-          <InvoiceStatus
-            status={invoiceFormState?.status || "draft"}
-            className={styles.statusValue}
-          />
+    <div className={styles.wrapper} ref={forwardedRef}>
+      <div className={styles.status}>
+        <div className={clsx(globalStyles.textSizeBody, styles.statusLabel)}>
+          Status
         </div>
-        <div className={styles.actions}>
+        <InvoiceStatus
+          status={invoiceFormState?.status || "draft"}
+          className={styles.statusValue}
+        />
+      </div>
+      <div
+        className={clsx(styles.actions, {
+          [styles.actionsShadow]: isShowActionsShadow,
+        })}
+      >
+        {invoiceFormState?.status !== "paid" && (
           <Button
             styleType="tertiary"
             className={styles.actionsEdit}
@@ -66,34 +95,33 @@ function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
           >
             Edit
           </Button>
-          <Modal
-            isOpen={isOpen as boolean}
-            toggleOpen={toggleModal as () => void}
-            trigger={
-              <Button styleType="danger" className={styles.actionsDelete}>
+        )}
+        <Modal
+          isOpen={isOpen as boolean}
+          toggleOpen={toggleModal as () => void}
+          trigger={
+            <Button styleType="danger" className={styles.actionsDelete}>
+              Delete
+            </Button>
+          }
+          title="Confirm Deletion"
+          description={`Are you sure you want to delete invoice #${invoiceId}? This action cannot be undone.`}
+          buttons={
+            <div className={styles.modalButtons}>
+              <Button styleType="tertiary" onClick={toggleModal as () => void}>
+                Cancel
+              </Button>
+              <Button
+                styleType="danger"
+                className={styles.actionsDelete}
+                onClick={handleDeleteInvoice}
+              >
                 Delete
               </Button>
-            }
-            title="Confirm Deletion"
-            description={`Are you sure you want to delete invoice #${invoiceId}? This action cannot be undone.`}
-            buttons={
-              <div className={styles.modalButtons}>
-                <Button
-                  styleType="tertiary"
-                  onClick={toggleModal as () => void}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  styleType="danger"
-                  className={styles.actionsDelete}
-                  onClick={handleDeleteInvoice}
-                >
-                  Delete
-                </Button>
-              </div>
-            }
-          />
+            </div>
+          }
+        />
+        {invoiceFormState?.status !== "paid" && (
           <Button
             styleType="primary"
             className={styles.actionsPaid}
@@ -101,10 +129,10 @@ function InvoiceDetailActions({ invoiceId }: InvoiceDetailActionsProps) {
           >
             Mark as Paid
           </Button>
-        </div>
+        )}
       </div>
-    </>
+    </div>
   );
-}
+});
 
 export default InvoiceDetailActions;

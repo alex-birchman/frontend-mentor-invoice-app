@@ -14,22 +14,18 @@ type ModalProps = {
   buttons: React.ReactNode;
 };
 
-function Modal({
-  isOpen,
-  toggleOpen,
-  trigger,
-  title,
-  description,
-  buttons,
-}: ModalProps) {
+const Modal = React.forwardRef(function Modal(
+  { isOpen, toggleOpen, trigger, title, description, buttons }: ModalProps,
+  forwardedRef: React.Ref<HTMLDivElement>
+) {
   return (
-    <Dialog.Root modal open={isOpen} onOpenChange={toggleOpen}>
+    <Dialog.Root open={isOpen} onOpenChange={toggleOpen}>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal
         container={document.querySelector("#modal-root") as HTMLElement}
       >
         <Dialog.Overlay className={styles.overlay} onClick={toggleOpen} />
-        <Dialog.Content className={styles.content}>
+        <Dialog.Content ref={forwardedRef} className={styles.content}>
           <Dialog.Title className={globalStyles.textSizeM}>
             {title}
           </Dialog.Title>
@@ -43,6 +39,6 @@ function Modal({
       </Dialog.Portal>
     </Dialog.Root>
   );
-}
+});
 
 export default Modal;

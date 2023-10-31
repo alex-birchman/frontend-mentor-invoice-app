@@ -38,6 +38,14 @@
   --viewport-padding: 24px;
 }
 
+html,
+body,
+button,
+input,
+textarea {
+  color: var(--color-text);
+}
+
 html {
   background: var(--color-page-background);
 }

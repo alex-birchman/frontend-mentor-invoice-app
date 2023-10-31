@@ -34,7 +34,6 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
   const {
     form,
     handleChange,
-    handleSubmit,
     handleDateChange,
     handleAddItem,
     handleChangeItem,
@@ -42,21 +41,29 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
     handleChangeStatus,
     handleSelectChange,
     getValidationErrors,
+    checkValidation,
   } = useInvoiceForm({
     initialState,
-    onSubmit: () => {},
-    onAfterSubmit: handleDismiss,
   });
   const formType = useSelector(selectInvoiceFormType);
   const errorMessages = getValidationErrors();
+  const thresholdRef = React.useRef<HTMLDivElement>(null);
+  const [isShowActionsShadow, setIsShowActionsShadow] = React.useState(false);
 
   const { ref: errorMessagesRef, triggerScroll } = useScrollTo({
     condition: errorMessages.length > 0,
   });
 
   function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
     triggerScroll();
-    handleSubmit(event);
+
+    const isFormValid = checkValidation();
+
+    if (!isFormValid) {
+      return;
+    }
 
     switch (formType) {
       case "create": {
@@ -68,6 +75,7 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
           total: form.items.reduce((acc, item) => acc + item.total, 0),
         });
         dispatch(addInvoice(formInvoice));
+        break;
       }
       case "edit": {
         if (!initialState) {
@@ -88,12 +96,29 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
           total: form.items.reduce((acc, item) => acc + item.total, 0),
         });
         dispatch(updateInvoice({ id, changes: formInvoice }));
+        break;
       }
     }
+
+    handleDismiss();
   }
 
   const title =
     formType === "create" ? "New Invoice" : `Edit #${initialState?.id}`;
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+
+      setIsShowActionsShadow(!entry.isIntersecting);
+    });
+
+    observer.observe(thresholdRef.current as HTMLDivElement);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -251,12 +276,17 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
             />
           </div>
         </div>
-        {errorMessages && (
+        {errorMessages.length > 0 && (
           <div ref={errorMessagesRef} className={styles.errorMessages}>
             <InvoiceFormErrorMessage errorMessages={errorMessages} />
           </div>
         )}
-        <div className={styles.actions}>
+        <div
+          className={clsx(styles.actions, {
+            [styles.actionsShadow]: isShowActionsShadow,
+            [styles.actionsEdit]: formType === "edit",
+          })}
+        >
           {formType === "create" && (
             <>
               <Button
@@ -310,6 +340,7 @@ function InvoiceForm({ initialState, handleDismiss }: InvoiceFormProps) {
             </>
           )}
         </div>
+        <div ref={thresholdRef} />
       </Form.Root>
     </div>
   );

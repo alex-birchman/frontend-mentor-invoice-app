@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { useSelector } from "react-redux";
 
 import { AppState } from "@/store";
@@ -19,6 +20,7 @@ type InvoiceDetailProps = {
 export default function InvoiceDetailPage({
   params: { invoiceId },
 }: InvoiceDetailProps) {
+  const thresholdRef = React.useRef<HTMLDivElement>(null);
   const invoice = useSelector((state: AppState) =>
     selectInvoiceById(state, invoiceId)
   );
@@ -31,11 +33,12 @@ export default function InvoiceDetailPage({
     <div className={styles.wrapper}>
       <InvoiceDetailBackButton />
       <div className={styles.actions}>
-        <InvoiceDetailActions invoiceId={invoiceId} />
+        <InvoiceDetailActions ref={thresholdRef} invoiceId={invoiceId} />
       </div>
       <div className={styles.detail}>
         <InvoiceDetail invoice={invoice} />
       </div>
+      <div ref={thresholdRef} />
     </div>
   );
 }

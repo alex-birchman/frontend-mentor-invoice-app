@@ -132,6 +132,7 @@
 @media (max-width: 480px) {
   .wrapper {
     padding: 24px;
+    margin-bottom: 80px;
   }
 
   .idDescriptionAndSenderAddress {

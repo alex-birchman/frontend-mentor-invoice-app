@@ -1,24 +1,9 @@
-.wrapper {
-  display: flex;
-  flex-direction: column;
-}
-
-.table {
-  display: flex;
-  flex-direction: column;
-}
-
-.tableHeader {
+.header {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
   gap: 16px;
   color: var(--color-secondary);
-}
-
-.tableBody {
-  display: flex;
-  flex-direction: column;
 }
 
 .item {
@@ -27,6 +12,10 @@
   grid-template-areas: "name qty price total action";
   align-items: center;
   margin-bottom: 18px;
+}
+
+.addNewItemButton {
+  width: 100%;
 }
 
 .colName {
@@ -93,7 +82,7 @@
 }
 
 @media (max-width: 768px) {
-  .tableHeader {
+  .header {
     display: none;
   }
 

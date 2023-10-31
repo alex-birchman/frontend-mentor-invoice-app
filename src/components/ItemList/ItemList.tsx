@@ -38,6 +38,7 @@ function Item({
         label={isMobile ? "Item Name" : ""}
         name={`item-name#${id}`}
         type="text"
+        placeholder="Item Name"
         value={name}
         onChange={(event) => {
           onChange(id, "name", event.target.value);
@@ -120,29 +121,25 @@ type ItemListProps = {
 
 function ItemList({ items, onChange, onDelete, onAdd }: ItemListProps) {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.table}>
-        <div className={clsx(globalStyles.textSizeBody, styles.tableHeader)}>
-          <span className={styles.colName}>Item Name</span>
-          <span className={styles.colQty}>Qty.</span>
-          <span className={styles.colPrice}>Price</span>
-          <span className={styles.colTotal}>Total</span>
-        </div>
-        <div className={styles.tableBody}>
-          {items.map((item) => (
-            <Item
-              key={item.id}
-              onChange={onChange}
-              onDelete={onDelete}
-              {...item}
-            />
-          ))}
-        </div>
+    <>
+      <div className={clsx(globalStyles.textSizeBody, styles.header)}>
+        <span className={styles.colName}>Item Name</span>
+        <span className={styles.colQty}>Qty.</span>
+        <span className={styles.colPrice}>Price</span>
+        <span className={styles.colTotal}>Total</span>
       </div>
-      <Button type="button" styleType="tertiary" onClick={onAdd}>
+      {items.map((item) => (
+        <Item key={item.id} onChange={onChange} onDelete={onDelete} {...item} />
+      ))}
+      <Button
+        type="button"
+        styleType="tertiary"
+        className={styles.addNewItemButton}
+        onClick={onAdd}
+      >
         + Add New Item
       </Button>
-    </div>
+    </>
   );
 }
 

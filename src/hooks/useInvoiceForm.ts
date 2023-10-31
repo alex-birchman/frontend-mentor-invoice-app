@@ -36,16 +36,9 @@ const initialFormValidationState: InvoiceFormValidation = {
 
 type UseInvoiceForm = {
   initialState?: InvoiceForm;
-  onSubmit: (form: InvoiceForm) => void;
-  onAfterSubmit?: () => void;
 };
 
-function useInvoiceForm(
-  { initialState, onSubmit, onAfterSubmit }: UseInvoiceForm = {
-    onSubmit: () => {},
-    onAfterSubmit: () => {},
-  }
-) {
+function useInvoiceForm({ initialState }: UseInvoiceForm) {
   const [form, setForm] = React.useState<InvoiceForm>(() => {
     return initialState ?? inititalFormState;
   });
@@ -60,19 +53,6 @@ function useInvoiceForm(
       ...prevForm,
       [name]: value,
     }));
-  }
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const isFormValid = checkValidation();
-
-    if (!isFormValid) {
-      return;
-    }
-
-    onSubmit(form);
-    onAfterSubmit && onAfterSubmit();
   }
 
   function handleChangeStatus(status: InvoiceStatusType) {
@@ -166,7 +146,6 @@ function useInvoiceForm(
   return {
     form,
     handleChange,
-    handleSubmit,
     handleDateChange,
     handleAddItem,
     handleChangeItem,
@@ -174,6 +153,7 @@ function useInvoiceForm(
     handleChangeStatus,
     handleSelectChange,
     getValidationErrors,
+    checkValidation,
   };
 }
 

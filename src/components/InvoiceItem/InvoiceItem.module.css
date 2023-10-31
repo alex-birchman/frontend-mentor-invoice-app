@@ -57,6 +57,8 @@
 .totalSum {
   grid-area: totalSum;
   text-align: right;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   padding-right: 40px;
 }

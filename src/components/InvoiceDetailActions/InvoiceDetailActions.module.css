@@ -21,6 +21,10 @@
   gap: 8px;
 }
 
+.actionsShadow {
+  box-shadow: none;
+}
+
 .statusLabel {
   color: var(--color-secondary);
 }
@@ -53,9 +57,14 @@
     right: 0;
     bottom: 0;
 
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 21px 24px 22px 24px;
     background: var(--color-white);
+  }
+
+  .actionsShadow {
+    box-shadow: 5px 150px 120px 150px var(--color-shadow-light);
+    transition: box-shadow 0.2s ease-in-out;
   }
 
   .actionsEdit {

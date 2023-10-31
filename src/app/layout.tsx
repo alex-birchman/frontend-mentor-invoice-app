@@ -3,7 +3,7 @@ import { League_Spartan } from "next/font/google";
 
 import Menu from "@/components/Menu";
 import Sidebar from "@/components/Sidebar";
-import InvoicesProvider from "@/components/InvoicesProvider";
+import ScrollProvider from "@/components/ScrollProvider";
 import Providers from "@/app/providers";
 
 import "./styles.css";
@@ -15,6 +15,8 @@ const mainFont = League_Spartan({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Invoice App",
   description: "A simple invoice app built with Next.js and TypeScript.",
+  viewport:
+    "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
 };
 
 export default function RootLayout({
@@ -24,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <Providers>
-      <InvoicesProvider>
+      <ScrollProvider>
         <html lang="en">
           <body className={mainFont.className}>
             <Menu />
@@ -35,7 +37,7 @@ export default function RootLayout({
             <div id="modal-root" />
           </body>
         </html>
-      </InvoicesProvider>
+      </ScrollProvider>
     </Providers>
   );
 }

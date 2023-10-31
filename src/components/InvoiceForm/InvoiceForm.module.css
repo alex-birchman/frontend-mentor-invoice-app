@@ -96,6 +96,7 @@
   flex-direction: column;
   gap: 14px;
   margin-top: 35px;
+  margin-bottom: 9px;
 }
 
 .itemListTitle {
@@ -103,7 +104,8 @@
 }
 
 .errorMessages {
-  margin-top: 30px;
+  margin-top: 34px;
+  margin-bottom: 10px;
 }
 
 .actions {
@@ -111,12 +113,30 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  margin-top: 45px;
+  border-radius: 0 20px 20px 0;
+
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 32px 56px;
+  margin: 0 -56px;
+  background: var(--color-white);
+}
+
+.actionsShadow {
+  box-shadow: 5px 150px 120px 150px var(--color-shadow-light);
+  transition: box-shadow 0.2s ease-in-out;
 }
 
 .actionsSaveButtons {
   display: flex;
   gap: 8px;
+}
+
+.actionsEdit {
+  justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -164,5 +184,11 @@
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
     row-gap: 24px;
+  }
+
+  .actions {
+    padding: 22px 24px;
+    margin: 0 -24px;
+    border-radius: 0;
   }
 }

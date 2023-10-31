@@ -1,73 +1,79 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
 
-    width: 100px;
-    height: 100vh;
-    height: 100svh;
-    background: var(--color-menu-background);
+  width: 100px;
+  height: 100vh;
+  height: 100svh;
+  background: var(--color-menu-background);
 
-    border-radius: 0 20px 20px 0;
-    z-index: 2;
+  border-radius: 0 20px 20px 0;
+  z-index: 2;
+
+  transition: top 0.3s;
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .actionItem {
-    padding: 24px 0;
+  padding: 24px 0;
 }
 
 /* two items divider */
 
 .actions::before {
-    align-self: stretch;
-    content: "";
-    border: 1px solid var(--color-menu-divider);
+  align-self: stretch;
+  content: "";
+  border: 1px solid var(--color-menu-divider);
 }
 
 .actions .actionItem:first-child {
-    order: -1;
+  order: -1;
 }
 
 @media (max-width: 1024px) {
-    .wrapper {
-        position: relative;
-        flex-direction: row;
-        width: auto;
-        height: 80px;
-        border-radius: 0;
-    }
+  .wrapper {
+    width: 100%;
+    height: 80px;
+    flex-direction: row;
+    border-radius: 0;
+  }
 
-    .actions {
-        flex-direction: row;
-    }
+  .hide {
+    top: -80px;
+  }
 
-    .actionItem {
-        padding: 0 20px;
-    }
+  .actions {
+    flex-direction: row;
+  }
+
+  .actionItem {
+    padding: 0 20px;
+  }
 }
 
 @media (max-width: 768px) {
-    .wrapper {
-        position: relative;
-        flex-direction: row;
-        width: auto;
-        height: 72px;
-        border-radius: 0;
-    }
+  .wrapper {
+    position: sticky;
+    width: 100%;
+    height: 72px;
+    flex-direction: row;
+    border-radius: 0;
+  }
 
-    .actions {
-        flex-direction: row;
-    }
+  .actions {
+    flex-direction: row;
+  }
 
-    .actionItem {
-        padding: 0 20px;
-    }
+  .actionItem {
+    padding: 0 20px;
+  }
 }

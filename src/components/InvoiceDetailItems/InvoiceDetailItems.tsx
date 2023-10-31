@@ -2,6 +2,7 @@ import * as React from "react";
 import clsx from "clsx";
 
 import { Item } from "@/types/invoice";
+
 import styles from "./InvoiceDetailItems.module.css";
 import globalStyles from "@/app/global.module.css";
 
