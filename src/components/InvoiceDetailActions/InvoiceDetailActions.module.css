@@ -59,7 +59,7 @@
 
     justify-content: flex-end;
     padding: 21px 24px 22px 24px;
-    background: var(--color-white);
+    background: var(--color-content-background);
   }
 
   .actionsShadow {
