@@ -57,7 +57,7 @@ export const LIGHT_COLORS = {
   "--color-checkbox-background": "hsl(0 0% 100%)",
   "--color-checkbox-item-background": DESIGN_SYSTEM_COLORS.SECONDARY_LIGHT,
   "--color-content-background": "hsl(0 0% 100%)",
-  "--color-content-secondary-background": "hsl(0 0% 100%)",
+  "--color-content-secondary-background": "hsl(231, 20%, 27%)",
 };
 
 export const DARK_COLORS = {
