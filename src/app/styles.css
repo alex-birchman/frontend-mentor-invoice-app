@@ -1,37 +1,6 @@
 :root {
   /* Colors  */
-  --color-text: hsla(231, 28%, 7%);
-  --color-text-light: hsla(231, 20%, 61%);
-  --color-primary: hsla(252, 94%, 67%);
-  --color-primary-light: hsla(252, 100%, 73%);
-
-  --color-secondary: hsla(231, 36%, 63%);
-  --color-secondary-light: hsla(231, 75%, 93%);
-
-  --color-danger: hsla(0, 80%, 63%);
-  --color-danger-light: hsla(0, 100%, 80%, 1);
-
   --color-white: hsla(0, 100%, 100%);
-  --color-shadow: hsla(231, 38%, 45%, 0.25);
-  --color-shadow-light: hsla(231, 38%, 45%, 0.1);
-
-  --color-page-background: hsla(240, 27%, 98%);
-  --color-menu-background: hsla(231, 20%, 27%);
-  --color-menu-divider: hsla(231, 20%, 36%);
-  --color-button-secondary: hsla(231, 20%, 27%, 1);
-  --color-button-tertiary: hsla(231, 67%, 96%, 1);
-  --color-button-tertiary-hover: hsla(231, 73%, 93%, 1);
-  --color-invoice-detail-items: hsla(231, 67%, 99%, 1);
-
-  /* Status colors */
-  --color-status-paid: hsla(160, 67%, 52%);
-  --color-status-paid-bg: hsla(161, 62%, 95%);
-
-  --color-status-pending: hsla(34, 100%, 50%);
-  --color-status-pending-bg: hsla(35, 62%, 95%);
-
-  --color-status-draft: hsla(231, 20%, 27%);
-  --color-status-draft-bg: hsla(231, 30%, 95%);
 
   /* Content sizes */
   --content-width: 730px;

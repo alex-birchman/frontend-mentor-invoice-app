@@ -75,7 +75,7 @@
 
   padding: 32px;
   border-radius: 0 0 0.5rem 0.5rem;
-  background: var(--color-status-draft);
+  background: var(--color-content-secondary-background);
   color: var(--color-white);
 }
 

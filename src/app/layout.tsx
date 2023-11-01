@@ -1,10 +1,14 @@
+import { CSSProperties } from "react";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { League_Spartan } from "next/font/google";
 
 import Menu from "@/components/Menu";
 import Sidebar from "@/components/Sidebar";
 import ScrollProvider from "@/components/ScrollProvider";
 import Providers from "@/app/providers";
+import { THEME_OPTIONS } from "@/types/theme";
+import { LIGHT_TOKENS, DARK_TOKENS } from "@/const/theme";
 
 import "./styles.css";
 import "./reset.css";
@@ -24,12 +28,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const savedTheme = cookies().get("color-theme");
+  const theme = (savedTheme?.value || "light") as THEME_OPTIONS;
+  const themeColor = (
+    theme === "light" ? LIGHT_TOKENS : DARK_TOKENS
+  ) as CSSProperties;
+
   return (
     <Providers>
       <ScrollProvider>
-        <html lang="en">
-          <body className={mainFont.className}>
-            <Menu />
+        <html lang="en" className={mainFont.className} style={themeColor}>
+          <body>
+            <Menu theme={theme} />
             <Sidebar />
             <main>{children}</main>
             <div id="sidebar-root" />

@@ -96,7 +96,7 @@
   font-family: "Helvetica Neue", helvetica, arial, sans-serif;
   font-size: 0.8rem;
   background-color: #fff;
-  color: #000;
+  color: var(--color-calendar-text);
   border: 1px solid #aeaeae;
   border-radius: 0.3rem;
   display: inline-block;
@@ -152,7 +152,7 @@
 
 .react-datepicker__header {
   text-align: center;
-  background-color: #ffffff;
+  background-color: var(--color-calendar-background);
   padding: 24px 18px;
   position: relative;
 }
@@ -464,7 +464,7 @@
 .react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {
-  color: #000;
+  color: var(--color-calendar-text);
   display: inline-block;
   width: 1.7rem;
   line-height: 1.7rem;

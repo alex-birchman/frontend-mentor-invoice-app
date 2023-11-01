@@ -20,7 +20,7 @@
 .container {
   position: relative;
   width: 720px;
-  background: var(--color-white);
+  background: var(--color-sidebar-background);
   margin-left: 0;
   border-radius: 0 20px 20px 0;
   padding-left: 100px;

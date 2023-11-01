@@ -30,6 +30,7 @@
 .input {
   padding: 18px 20px 15px 20px;
   border: 1px solid var(--color-secondary-light);
+  background: var(--color-input-background);
   border-radius: 4px;
 }
 
@@ -44,6 +45,10 @@
 
 .input[data-invalid="true"]:focus {
   border: 1px solid var(--color-danger);
+}
+
+.input::placeholder {
+  color: var(--color-input-placeholder);
 }
 
 .inputEmpty {

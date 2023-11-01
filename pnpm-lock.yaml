@@ -31,6 +31,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  js-cookie:
+    specifier: ^3.0.5
+    version: 3.0.5
   luxon:
     specifier: ^3.4.3
     version: 3.4.3
@@ -63,6 +66,9 @@ dependencies:
     version: 2.5.7(@types/react@18.2.28)(react@18.2.0)
 
 devDependencies:
+  '@types/js-cookie':
+    specifier: ^3.0.5
+    version: 3.0.5
   '@types/luxon':
     specifier: ^3.3.3
     version: 3.3.3
@@ -999,6 +1005,10 @@ packages:
       '@types/react': 18.2.28
       hoist-non-react-statics: 3.3.2
     dev: false
+
+  /@types/js-cookie@3.0.5:
+    resolution: {integrity: sha512-dtLshqoiGRDHbHueIT9sjkd2F4tW1qPSX2xKAQK8p1e6pM+Z913GM1shv7dOqqasEMYbC5zEaClJomQe8OtQLA==}
+    dev: true
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
@@ -2307,6 +2317,11 @@ packages:
       reflect.getprototypeof: 1.0.4
       set-function-name: 2.0.1
     dev: true
+
+  /js-cookie@3.0.5:
+    resolution: {integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==}
+    engines: {node: '>=14'}
+    dev: false
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}

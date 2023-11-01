@@ -16,7 +16,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background: var(--color-white);
+  background: var(--color-content-background);
 
   border-radius: 0.5rem;
   padding: 48px;
