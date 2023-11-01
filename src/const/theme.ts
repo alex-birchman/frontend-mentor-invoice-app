@@ -91,18 +91,12 @@ export const DARK_COLORS = {
   "--color-content-secondary-background": "hsl(231 28% 7%)",
 };
 
-export const LIGHT_SHADOWS = {};
-
-export const DARK_SHADOWS = {};
-
 export const LIGHT_TOKENS = {
   ...LIGHT_COLORS,
-  ...LIGHT_SHADOWS,
   ...STATUS_COLORS_LIGHT,
 };
 
 export const DARK_TOKENS = {
   ...DARK_COLORS,
-  ...DARK_SHADOWS,
   ...STATUS_COLORS_DARK,
 };
