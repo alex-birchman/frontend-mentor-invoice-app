@@ -1,14 +1,7 @@
-import {
-  createEntityAdapter,
-  createSlice,
-  createSelector,
-  PayloadAction,
-} from "@reduxjs/toolkit";
+import { createSlice, createSelector, PayloadAction } from "@reduxjs/toolkit";
 
 import { SidebarInitialState, SidebarContentView } from "@/types/sidebar";
 import { AppState } from "@/store";
-
-const sidebarAdapter = createEntityAdapter();
 
 const initialState: SidebarInitialState = {
   isOpen: false,
