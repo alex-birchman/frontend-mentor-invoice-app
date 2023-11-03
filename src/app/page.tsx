@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 
-import InvoicesHeader from "@/components/InvoicesHeader";
-import InvoicesList from "@/components/InvoicesList";
+import InvoicesHeader from "@/components/Invoices/InvoicesHeader";
+import InvoicesList from "@/components/Invoices/InvoicesList";
 
 export default function Home() {
   return (

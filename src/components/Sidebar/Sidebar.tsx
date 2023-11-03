@@ -13,7 +13,7 @@ import {
   toggleSidebar,
 } from "@/store/sidebar";
 import { resetInvoiceForm, selectInvoiceFormState } from "@/store/invoiceForm";
-import InvoiceForm from "@/components/InvoiceForm";
+import InvoiceForm from "@/components/Invoices/InvoiceForm";
 
 import styles from "./Sidebar.module.css";
 

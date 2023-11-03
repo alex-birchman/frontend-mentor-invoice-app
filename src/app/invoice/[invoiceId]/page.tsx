@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 
 import { AppState } from "@/store";
 import { selectInvoiceById } from "@/store/invoices";
-import InvoiceDetailBackButton from "@/components/InvoiceDetailBackButton";
-import InvoiceDetailActions from "@/components/InvoiceDetailActions";
-import InvoiceDetail from "@/components/InvoiceDetail";
+import InvoiceDetailBackButton from "@/components/Invoices/InvoiceDetailBackButton";
+import InvoiceDetailActions from "@/components/Invoices/InvoiceDetailActions";
+import InvoiceDetail from "@/components/Invoices/InvoiceDetail";
 
 import styles from "./page.module.css";
 

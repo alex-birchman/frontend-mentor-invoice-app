@@ -9,7 +9,7 @@ import { AppState } from "@/store";
 import {
   PAYMENT_TERM_DEFAULT_VALUE,
   INVOICE_STATUS_DEFAULT_VALUE,
-} from "@/components/InvoiceForm/InvoiceForm.const";
+} from "@/components/Invoices/InvoiceForm/InvoiceForm.const";
 import {
   InvoiceForm,
   InvoiceFormType,

@@ -4,8 +4,8 @@ import * as React from "react";
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 
-import InvoicesFilter from "@/components/InvoicesFilter";
-import CreateInvoiceButton from "@/components/CreateInvoiceButton";
+import InvoicesFilter from "@/components/Invoices/InvoicesFilter";
+import CreateInvoiceButton from "@/components/Invoices/CreateInvoiceButton";
 
 import styles from "./InvoicesHeader.module.css";
 import globalStyles from "@/app/global.module.css";

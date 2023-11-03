@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
-import InvoiceStatus from "@/components/InvoiceStatus";
+import InvoiceStatus from "@/components/Invoices/InvoiceStatus";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import useToggle from "@/hooks/useToggle";

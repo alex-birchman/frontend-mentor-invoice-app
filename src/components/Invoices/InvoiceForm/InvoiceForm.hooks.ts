@@ -10,7 +10,7 @@ import {
 import {
   ITEMS_ERROR_VALIDATION_MESSAGE,
   PAYMENT_TERM_DEFAULT_VALUE,
-} from "@/components/InvoiceForm/InvoiceForm.const";
+} from "./InvoiceForm.const";
 
 const inititalFormState: InvoiceForm = {
   senderAddressStreet: "",

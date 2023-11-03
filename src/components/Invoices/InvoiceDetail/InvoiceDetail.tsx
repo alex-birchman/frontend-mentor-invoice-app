@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { DateTime } from "luxon";
 
 import { Invoice } from "@/types/invoice";
-import InvoiceDetailItems from "@/components/InvoiceDetailItems";
+import InvoiceDetailItems from "@/components/Invoices/InvoiceDetailItems";
 
 import styles from "./InvoiceDetail.module.css";
 import globalStyles from "@/app/global.module.css";

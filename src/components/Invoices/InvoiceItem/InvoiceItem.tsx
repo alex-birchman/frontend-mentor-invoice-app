@@ -4,7 +4,7 @@ import Link from "next/link";
 import { DateTime } from "luxon";
 import { ChevronRight } from "react-feather";
 
-import InvoiceStatus from "@/components/InvoiceStatus";
+import InvoiceStatus from "@/components/Invoices/InvoiceStatus";
 import { Invoice } from "@/types/invoice";
 
 import styles from "./InvoiceItem.module.css";
