@@ -13,11 +13,24 @@ import { sidebarSlice } from "@/store/sidebar";
 
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
+const createNoopStorage = (): Storage => {
+  return {
+    getItem(_key: string) {
+      return Promise.resolve(null);
+    },
+    setItem(_key: string, value: any) {
+      return Promise.resolve(value);
+    },
+    removeItem(_key: string) {
+      return Promise.resolve();
+    },
+  };
+};
+
 const storage =
   typeof window !== "undefined"
     ? createWebStorage("local")
-    : // This nasty hack is needed because of Next.js 13 "Uncaught Error: invariant expected app router to be mounted"
-      ({} as Storage);
+    : createNoopStorage();
 
 const persistConfig = {
   key: "root",

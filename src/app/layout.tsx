@@ -35,19 +35,19 @@ export default function RootLayout({
   ) as CSSProperties;
 
   return (
-    <Providers>
-      <ScrollProvider>
-        <html lang="en" className={mainFont.className} style={themeColor}>
-          <body>
+    <ScrollProvider>
+      <html lang="en" className={mainFont.className} style={themeColor}>
+        <body>
+          <Providers>
             <Menu theme={theme} />
             <Sidebar />
             <main>{children}</main>
             <div id="sidebar-root" />
             <div id="calendar-root" />
             <div id="modal-root" />
-          </body>
-        </html>
-      </ScrollProvider>
-    </Providers>
+          </Providers>
+        </body>
+      </html>
+    </ScrollProvider>
   );
 }
