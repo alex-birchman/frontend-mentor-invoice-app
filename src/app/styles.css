@@ -17,6 +17,11 @@ textarea {
 
 html {
   background: var(--color-page-background);
+  transition: background 0.25s ease-in-out;
+}
+
+html * {
+  transition: background 0.25s ease-in-out;
 }
 
 body {
