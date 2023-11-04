@@ -9,10 +9,10 @@ import CreateInvoiceButton from "@/components/Invoices/CreateInvoiceButton";
 
 import styles from "./InvoicesHeader.module.css";
 import globalStyles from "@/app/global.module.css";
-import { selectTotalInvoices } from "@/store/invoices";
+import { selectInvoicesByFiltersCount } from "@/store/invoices";
 
 function InvoicesHeader() {
-  const totatlInvoices = useSelector(selectTotalInvoices);
+  const totatlInvoices = useSelector(selectInvoicesByFiltersCount);
 
   const descriptionDesktop =
     totatlInvoices === 0

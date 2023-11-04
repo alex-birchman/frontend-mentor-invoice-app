@@ -105,6 +105,11 @@ export const selectInvoicesByFilters = createSelector(
   }
 );
 
+export const selectInvoicesByFiltersCount = createSelector(
+  [selectInvoicesByFilters],
+  (invoices) => invoices.length
+);
+
 export const {
   addInvoice,
   updateInvoice,
