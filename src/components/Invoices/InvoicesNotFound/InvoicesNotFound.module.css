@@ -19,3 +19,21 @@
   max-width: 200px;
   margin-top: 25px;
 }
+
+.descriptionDesktop {
+  display: block;
+}
+
+.descriptionMobile {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .descriptionDesktop {
+    display: none;
+  }
+
+  .descriptionMobile {
+    display: block;
+  }
+}

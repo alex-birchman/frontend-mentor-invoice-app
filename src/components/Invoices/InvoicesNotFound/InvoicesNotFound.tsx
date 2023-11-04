@@ -18,9 +18,24 @@ function InvoicesNotFound() {
         <h2 className={clsx(globalStyles.textSizeM, styles.title)}>
           There is nothing here
         </h2>
-        <p className={clsx(globalStyles.textSizeBody, styles.description)}>
+        <p
+          className={clsx(
+            globalStyles.textSizeBody,
+            styles.description,
+            styles.descriptionDesktop
+          )}
+        >
           Create an invoice by clicking the <b>New Invoice</b> button and get
           started
+        </p>
+        <p
+          className={clsx(
+            globalStyles.textSizeBody,
+            styles.description,
+            styles.descriptionMobile
+          )}
+        >
+          Create an invoice by clicking the <b>New</b> button and get started
         </p>
       </div>
     </div>

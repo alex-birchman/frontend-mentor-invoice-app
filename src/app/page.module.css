@@ -1,26 +1,26 @@
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: var(--content-width);
-    padding-top: 77px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--content-width);
+  padding-top: 77px;
+  margin: 0 auto;
 }
 
 .content {
-    width: 100%;
-    margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-    .wrapper {
-        padding-top: 61px;
-    }
+  .wrapper {
+    padding-top: 61px;
+  }
 }
 
 @media (max-width: 480px) {
-    .wrapper {
-        padding-top: 32px;
-    }
+  .wrapper {
+    padding-top: 32px;
+  }
 }
