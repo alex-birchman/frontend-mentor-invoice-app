@@ -7,6 +7,7 @@ import { Check, ChevronDown, ChevronUp } from "react-feather";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
+import Badge from "@/components/Badge";
 import { useAppDispatch } from "@/store";
 import {
   selectInvoicesFilters,
@@ -70,13 +71,19 @@ function InvoicesFilter() {
     <DropdownMenu.Root open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenu.Trigger asChild>
         <div className={styles.selector}>
-          <p className={clsx(globalStyles.textSizeS, styles.titleDesktop)}>
-            Filter by status{" "}
-            {selectedCountFilters > 0 && `(${selectedCountFilters})`}
-          </p>
-          <p className={clsx(globalStyles.textSizeS, styles.titleMobile)}>
-            Filter {selectedCountFilters > 0 && `(${selectedCountFilters})`}
-          </p>
+          <div className={styles.selectorTitle}>
+            <p className={clsx(globalStyles.textSizeS, styles.titleDesktop)}>
+              Filter by status
+            </p>
+            <p className={clsx(globalStyles.textSizeS, styles.titleMobile)}>
+              Filter
+            </p>
+            {selectedCountFilters > 0 && (
+              <Badge className={clsx(styles.selectorBadge)}>
+                {selectedCountFilters}
+              </Badge>
+            )}
+          </div>
           {isOpen ? (
             <ChevronUp
               size="1rem"

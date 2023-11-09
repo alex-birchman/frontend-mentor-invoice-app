@@ -1,0 +1,14 @@
+.wrapper {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 2px;
+
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
