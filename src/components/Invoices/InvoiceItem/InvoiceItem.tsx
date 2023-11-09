@@ -32,7 +32,7 @@ function InvoiceItem({
   ).toFormat("dd MMM yyyy");
 
   return (
-    <Link href={`/invoice/${id}`} className={styles.wrapper}>
+    <Link href={`/invoice/${id}`} prefetch={true} className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.id}>
           <span className={styles.idHashTag}>#</span>
